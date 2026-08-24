@@ -20,3 +20,4 @@ WhatsApp Image*.jpg
 *.synctex.gz
 *.toc
 _build/.browser
+assets/cv/*.pdf
