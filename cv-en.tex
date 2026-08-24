@@ -178,21 +178,21 @@
   \documentTitle{Mohamad Kassem Moussa}{
     \href{tel:+595972117118}{Phone: +595 972 117118} ~|~
     \href{mailto:moha251mmed@gmail.com}{moha251mmed@gmail.com} ~|~
-    \href{https://placaflaca00.github.io/CV/}{Portfolio: placaflaca00.github.io/CV} \\
+    Ciudad del Este, Paraguay \\
     \vspace{2pt}
+    \href{https://placaflaca00.github.io/CV/}{Portfolio: placaflaca00.github.io/CV} ~|~
     \href{https://www.linkedin.com/in/mohamad-kassem-moussa-57b3261b8/}{LinkedIn: mohamad-kassem-moussa} ~|~
-    \href{https://github.com/Placaflaca00}{GitHub: Placaflaca00} ~|~
-    Paraguay
+    \href{https://github.com/Placaflaca00}{GitHub: Placaflaca00}
   }
 
-  \documentSubtitle{Artificial Intelligence Specialist ~$\cdot$~ Applied AI and process automation}
+  \documentSubtitle{Artificial Intelligence Specialist ~$\cdot$~ AI / Machine Learning Engineer}
 
   %---------%
   % Profile %
   %---------%
 
   \tinysection{Profile}
-  Systems Engineer (FPUNA, GPA 4.0) focused on \textbf{applied Artificial Intelligence and process automation}. I shipped an \textbf{AI sales assistant to production} over a \textbf{22,400-product catalog} for a wholesale sales team, answering with real SKUs, prices and stock; and computer-vision models deployed to the cloud (AWS) with CI/CD and monitoring. Earlier I worked in \textbf{e-commerce and costing} inside a retail operation, so I understand the process AI is supposed to improve, not just the model. I want to apply AI tooling and automation to real operations: sales, catalog, customer support and back office.
+  Systems Engineer (FPUNA, GPA 4.0) working in \textbf{applied Artificial Intelligence}: I take models from raw data all the way to production. I shipped an \textbf{AI sales assistant} over a \textbf{22,400-product catalog} —fine-tuned by me, self-hosted, and gated by an automated evaluation that decided every release— and \textbf{computer-vision} models trained on synthetic data and deployed to AWS with CI/CD and monitoring. I want to apply AI and automation to real operations: sales, catalog, customer support and internal processes.
 
   %--------%
   % Skills %
@@ -202,12 +202,10 @@
 
   \begin{resume_list}
     \item \textbf{AI and LLMs:} fine-tuning (QLoRA / LoRA), RAG and information retrieval (BM25 / FTS5, embeddings), prompt engineering, evaluation and benchmark design, anti-hallucination guardrails, vLLM, Hugging Face, open-source models and frontier-model APIs
-    \item \textbf{Machine Learning and Vision:} PyTorch, TensorFlow, ONNX, Detectron2, SAM2, scikit-learn, OpenCV, Pandas, NumPy
-    \item \textbf{Automation and integration:} n8n, Python, Bash / shell scripting, REST APIs with FastAPI, GitHub Actions (CI/CD), Docker, JavaScript, PHP, Java
-    \item \textbf{Data and infrastructure:} PostgreSQL, SQLite / FTS5, AWS (Lambda, ECR, API Gateway, CloudWatch), Linux (Debian / Ubuntu), Git / GitHub, Streamlit, LaTeX, Microsoft Excel (MOS certified) and PowerPoint
-    \item \textbf{Networking and security:} VPN (WireGuard, ProtonVPN), Tailscale (Zero Trust, MFA, ACLs), SSH, Pi-hole
+    \item \textbf{Machine Learning and Vision:} PyTorch, TensorFlow, ONNX, Detectron2, SAM2, scikit-learn, OpenCV, Pandas, NumPy, synthetic data generation
+    \item \textbf{MLOps and automation:} AWS (Lambda, ECR, API Gateway, CloudWatch), Docker, GitHub Actions (CI/CD), REST APIs with FastAPI, n8n, Python, Bash, Linux, Git
+    \item \textbf{Data:} PostgreSQL, SQLite / FTS5, Streamlit, Microsoft Excel (MOS certified)
     \item \textbf{Languages:} Arabic (native), Spanish (advanced), English (intermediate)
-    \item \textbf{Interpersonal:} multidisciplinary teamwork, technical communication and presentations, complex problem solving, self-management and remote work, continuous learning
   \end{resume_list}
 
   %------------%
@@ -222,10 +220,9 @@
     \item Shipped an \textbf{AI sales assistant to production} for a $\sim$70-person sales team: natural-language search over a \textbf{22,400-product catalog}, answering with real SKUs, prices and stock instead of generic text
     \item \textbf{Fine-tuned an 8B-parameter model with QLoRA} on 2,172 curated multi-turn conversations: a 60-case held-out benchmark went from \textbf{88.3\% to 95.0\%} with zero critical failures, trained on a single GPU
     \item Built the \textbf{release gate} (automated 60-case evaluation, automatic abort on train/test contamination) and ran it on 5 versions: \textbf{it blocked 2 from production}, each with a written causal analysis
-    \item Reached \textbf{96.0\% true recall over 25,787 queries} on a self-verifying benchmark I generated from the catalog itself (zero manual annotation); killed a planned neural re-ranker after \textbf{measuring its ceiling at +0.3 points}, saving weeks of work
+    \item Reached \textbf{96.0\% true recall over 25,787 queries} on a self-verifying benchmark I generated from the catalog itself, with zero manual annotation; killed a planned neural re-ranker after \textbf{measuring its ceiling at +0.3 points}
     \item Self-hosted the model with \textbf{vLLM} (FP8, prefix caching) on a single GPU: \textbf{p50 of 2.2 s} across 309 real production turns and \textbf{80 concurrent requests with 0 errors} under load testing
-    \item Also built an \textbf{AI product finder for the public storefront}: compare, cart, favourites, shareable links and voice search
-    \item Instrumented \textbf{17 production guardrails} and 85 pipeline tracepoints at zero runtime cost, then used that telemetry to identify the project's real bottleneck (adoption, not model quality)
+    \item Instrumented \textbf{17 production guardrails} and 85 pipeline tracepoints at zero runtime cost, and also built an \textbf{AI product finder} for the public storefront
   \end{resume_list}
 
   \headingBf{AI / Computer Vision Research Intern — Itaipu Parquetec (PTI)}{2024 -- 2026}
@@ -235,30 +232,13 @@
     \item Trained an \textbf{18-class instance-segmentation model} to \textbf{70.1\% box mAP} / 64.5\% mask mAP on a 10,000-image held-out set
     \item Designed and prototyped a \textbf{georeferencing engine} that locates each detection from the drone's GPS and orientation metadata
     \item Developed an \textbf{AI-assisted annotation tool} (SAM2-based) for images and video, speeding up the team's labelling workflow
-    \item Coordinated with the research team and presented results to faculty and researchers
-  \end{resume_list}
-
-  \headingBf{Monalisa}{November 2021 -- January 2022}
-  \headingIt{Costing Office}{}
-  \begin{resume_list}
-    \item Produced product lists with descriptions and costs for upload to the e-commerce platform
-    \item Kept the cost database accurate and consistent as prices changed and new items arrived
-    \item Coordinated with the e-commerce team to get products correctly implemented in the system
-  \end{resume_list}
-
-  \headingBf{Monalisa}{November 2020 -- February 2021}
-  \headingIt{E-commerce Office}{}
-  \begin{resume_list}
-    \item Managed and updated new product uploads in the system using the Compiere application
-    \item Ensured accuracy and consistency of product data across the e-commerce platform
-    \item Provided support and resolved incidents related to product upload and management
   \end{resume_list}
 
   %----------%
   % Projects %
   %----------%
 
-  \section{Selected Projects}
+  \section{AI Projects}
 
   \headingBf{ConoceTuAve — Bird-call classifier in production}{2026}
   \headingIt{PyTorch, ONNX, AWS Lambda, GitHub Actions -- \href{https://huggingface.co/spaces/placaflaca/bird-classifier-py}{live demo}}{}
@@ -272,13 +252,6 @@
   \begin{resume_list}
     \item Multi-task 1D CNN predicting compound, crystal system and unit-cell parameters from a single XRD pattern: \textbf{89.4\% compound accuracy} (18 classes) and \textbf{97.9\% crystal-system accuracy} (6 classes)
     \item Trained \textbf{entirely on synthetic spectra} simulated from CIF files, with no real-data dependency; released as a Streamlit web app
-  \end{resume_list}
-
-  \headingBf{Automated media server on Raspberry Pi 5}{2025}
-  \headingIt{Personal infrastructure, automation and security project}{}
-  \begin{resume_list}
-    \item Automated a full \textbf{Docker} stack (Radarr, Sonarr, Prowlarr, Jellyfin) with OpenMediaVault storage and SMB/CIFS shares
-    \item Implemented network security: VPN with kill-switch and interface binding, \textbf{Zero Trust remote access with Tailscale} (MFA and ACLs), and Pi-hole for network-wide DNS filtering
   \end{resume_list}
 
   %-----------%
@@ -299,25 +272,11 @@
   \section{Certifications and Conferences}
 
   \begin{resume_list}
-    \item \textbf{Microsoft Office Specialist — Excel 2016} -- Microsoft / Certiport (Nov. 2019, credential UGxL-sFMp, verifiable online)
-    \item \textbf{Microsoft PowerPoint} -- Microsoft certification (certified instructor)
     \item \textbf{Machine Learning with Python} and \textbf{Python for Everybody} -- freeCodeCamp
     \item \textbf{Google Summit: AI for Education} -- Google (2024)
     \item \textbf{III Paraguayan Informatics Congress: towards ethical and explainable AI} -- XXI Scientific and Technological Meeting (October 2025)
     \item \textbf{Thesis presentation} -- II Encontro de Física Aplicada na Tríplice Fronteira, UNILA, Foz do Iguaçu, Brazil (2025)
-    \item \textbf{Public Speaking certificate} -- effective communication and presentations (2024)
-  \end{resume_list}
-
-  %------------%
-  % Volunteer  %
-  %------------%
-
-  \section{Volunteering}
-
-  \headingBf{Facultad Politécnica (FPUNA) — Microsoft PowerPoint Instructor}{March -- April 2021}
-  \begin{resume_list}
-    \item Designed and taught a full course for university students, with my own teaching material and hands-on exercises
-    \item Provided technical support and one-to-one assistance so participants could build effective presentations
+    \item \textbf{Microsoft Office Specialist — Excel 2016} -- Microsoft / Certiport (credential UGxL-sFMp, verifiable online)
   \end{resume_list}
 
 \end{document}
