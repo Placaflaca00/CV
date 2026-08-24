@@ -1,0 +1,70 @@
+/* =============================================================================
+   Case study: XRD Phase Identification — dashboard only.
+   (Shared case-study chrome — hero, meta, bullets, back-link — lives in
+   styles.css so every case page gets it.)
+   The user's results dashboard, recoloured to the site's SINGLE violet system,
+   de-carded (flows as page content), with its duplicate title + motif hidden.
+   All selectors scoped under `.xrd`; its CSS vars are defined ON `.xrd`
+   (remapped to site tokens) so nothing leaks to the rest of the site.
+   ========================================================================== */
+
+.xrd {
+  --panel:#141417; --panel2:#1c1c21; --muted:#76767f;
+  --copper:#b6a4fb;   /* points, kick, accents  -> light violet */
+  --copper2:#c9bafd;  /* big numbers            -> lighter violet */
+  --teal:#5b9bf6;     /* reference line, hilite -> blue */
+  --good:#8b5cf6;     /* full-bar gradient start-> violet */
+  font-family: var(--f-body);
+  color: var(--text);
+  position: relative;
+}
+/* the page hero already shows the title — drop the dashboard's own header */
+.xrd .motif, .xrd .head { display: none; }
+
+.xrd .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:38px;position:relative;z-index:1}
+.xrd .card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:13px;padding:20px 18px;
+  opacity:0;transform:translateY(14px);animation:xrdRise .6s cubic-bezier(.2,.7,.2,1) forwards}
+.xrd .card:nth-child(1){animation-delay:.1s}.xrd .card:nth-child(2){animation-delay:.18s}
+.xrd .card:nth-child(3){animation-delay:.26s}.xrd .card:nth-child(4){animation-delay:.34s}
+@keyframes xrdRise{to{opacity:1;transform:none}}
+.xrd .card .v{font-family:'Fraunces',Georgia,serif;font-size:clamp(30px,4vw,42px);font-weight:600;line-height:1;letter-spacing:-.02em}
+.xrd .card .v span{font-size:.5em;color:var(--copper);margin-left:2px}
+.xrd .card .l{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-top:12px;line-height:1.5}
+.xrd .card.acc .v{color:var(--copper2)}
+.xrd .sect{display:grid;grid-template-columns:1fr;gap:34px;position:relative;z-index:1}
+@media(min-width:880px){.xrd .sect{grid-template-columns:.82fr 1.18fr}}
+.xrd .block-h{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.xrd .block-h:before{content:"";width:18px;height:1px;background:var(--copper)}
+.xrd .bars{display:flex;flex-direction:column;gap:13px}
+.xrd .bar-row{display:grid;grid-template-columns:96px 1fr auto auto;align-items:center;gap:12px;font-size:13px}
+.xrd .bar-name{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text)}
+.xrd .bar-track{height:8px;background:#0c0c0e;border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.xrd .bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--copper),var(--copper2));border-radius:6px;animation:xrdGrow 1s cubic-bezier(.2,.7,.2,1) forwards .3s}
+.xrd .bar-fill.full{background:linear-gradient(90deg,var(--good),var(--teal))}
+@keyframes xrdGrow{to{width:var(--w)}}
+.xrd .bar-val{font-family:'Fraunces',Georgia,serif;font-size:17px;font-weight:600;min-width:42px;text-align:right}
+.xrd .bar-val span{font-size:.6em;color:var(--muted)}
+.xrd .bar-n{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);min-width:34px;text-align:right}
+.xrd .scats{display:flex;flex-wrap:wrap;gap:8px}
+.xrd .scwrap{flex:1 1 180px;min-width:170px}
+.xrd .scwrap figcaption{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:4px}
+.xrd .scwrap figcaption b{color:var(--copper2)}
+.xrd .sc{width:100%;height:auto;display:block}
+.xrd .sc .grid{stroke:var(--line);stroke-width:.6;opacity:.6}
+.xrd .sc .ref{stroke:var(--teal);stroke-width:1.2;stroke-dasharray:5 4;opacity:.85}
+.xrd .sc .pt{fill:var(--copper);opacity:.6}
+.xrd .sc .tick{fill:var(--muted);font-family:'JetBrains Mono',monospace;font-size:9px}
+.xrd .sc .axl{fill:var(--muted);font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.05em}
+.xrd .sc .r2{fill:var(--copper2);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700}
+.xrd .foot{margin-top:38px;padding-top:22px;border-top:1px solid var(--line);position:relative;z-index:1;
+  display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;justify-content:space-between}
+.xrd .stack{display:flex;flex-wrap:wrap;gap:8px}
+.xrd .chip{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.06em;color:var(--muted);
+  border:1px solid var(--line);border-radius:20px;padding:5px 12px;background:var(--panel)}
+.xrd .note{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted)}
+.xrd .note b{color:var(--teal)}
+
+@media (prefers-reduced-motion: reduce){
+  .xrd .card{animation:none;opacity:1;transform:none}
+  .xrd .bar-fill{animation:none;width:var(--w)}
+}

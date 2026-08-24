@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Local tooling / private notes — deliberately NOT published
+.claude/
+metrics/
+_backup_original/
+
+# Personal images that are not part of the site
+WhatsApp Image*.jpeg
+WhatsApp Image*.jpg
+
+# LaTeX build leftovers
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+_build/.browser

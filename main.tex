@@ -1,0 +1,323 @@
+%%%%
+% CV — Mohamad Kassem Moussa (Español)
+% Puesto objetivo: Especialista en Inteligencia Artificial
+%%%%
+% Plantilla base: MTecknology's Resume — Michael Lustfield — CC-BY-4
+% - https://creativecommons.org/licenses/by/4.0/legalcode.txt
+%%%%
+
+\documentclass[letterpaper,10pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% BEGIN_FILE: mteck.sty
+%% NOTE: Everything between BEGIN_FILE and END_FILE can
+%% be moved to "mteck.sty" and then included with \usepackage{mteck}.
+
+% Dependencies
+% NOTE: Some packages (lastpage, hyperref) require second build!
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{bookmark}
+\usepackage{lastpage}
+
+% Sans-Serif
+%\usepackage[sfdefault]{FiraSans}
+%\usepackage[sfdefault]{roboto}
+%\usepackage[sfdefault]{noto-sans}
+%\usepackage[default]{sourcesanspro}
+
+% Serif - Usando fuentes estándar de LaTeX
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+% Colors
+% Use with \color{Name}
+% Can wrap entire heading with {\color{accent} [...] }
+\usepackage{xcolor}
+\definecolor{accentTitle}{HTML}{0e6e55}
+\definecolor{accentText}{HTML}{0e6e55}
+\definecolor{accentLine}{HTML}{a16f0b}
+
+% Misc. Options
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\urlstyle{same}
+
+% Adjust Margins
+\addtolength{\oddsidemargin}{-0.7in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-0.7in}
+\addtolength{\textheight}{1.4in}
+
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\setlength{\tabcolsep}{0pt}
+\setlength{\footskip}{3.7pt}
+\raggedbottom
+\raggedright
+
+% ATS Readability
+\input{glyphtounicode}
+\pdfgentounicode=1
+
+%-----------------%
+% Custom Commands %
+%-----------------%
+
+% Centered title along with subtitle between HR
+% Usage: \documentTitle{Name}{Details}
+\newcommand{\documentTitle}[2]{
+  \begin{center}
+    {\Huge\scshape\color{accentTitle} #1}
+    \vspace{10pt}
+    {\color{accentLine} \hrule}
+    \vspace{2pt}
+    \footnotesize{#2}
+    \vspace{2pt}
+    {\color{accentLine} \hrule}
+  \end{center}
+}
+
+% Centered role headline under the title
+% Usage: \documentSubtitle{Target role}
+\newcommand{\documentSubtitle}[1]{
+  \vspace{-4pt}
+  \begin{center}
+    {\scshape\color{accentText} #1}
+  \end{center}
+  \vspace{-6pt}
+}
+
+% Create a footer with correct padding
+% Usage: \documentFooter{\thepage of X}
+\newcommand{\documentFooter}[1]{
+  \setlength{\footskip}{10.25pt}
+  \fancyfoot[C]{\footnotesize #1}
+}
+
+% Simple wrapper to set up page numbering
+% Usage: \numberedPages
+% WARNING: Must run pdflatex twice!
+\newcommand{\numberedPages}{
+  \documentFooter{\thepage/\pageref{LastPage}}
+}
+
+% Section heading with horizontal rule
+% Usage: \section{Title}
+\titleformat{\section}{
+  \vspace{-5pt}
+  \color{accentText}
+  \scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{accentLine}\titlerule]
+
+% Section heading with separator and content on same line
+% Usage: \tinysection{Title}
+\newcommand{\tinysection}[1]{
+  \phantomsection
+  \addcontentsline{toc}{section}{#1}
+  {\scshape\large{\bfseries\color{accentText}#1} {\color{accentLine} |}}
+}
+
+% Indented line with arguments left/right aligned in document
+% Usage: \heading{Left}{Right}
+\newcommand{\heading}[2]{
+  \hspace{10pt}#1\hfill#2\\
+}
+
+% Adds \textbf to \heading
+\newcommand{\headingBf}[2]{
+  \heading{\textbf{#1}}{\textbf{#2}}
+}
+
+% Adds \textit to \heading
+\newcommand{\headingIt}[2]{
+  \heading{\textit{#1}}{\textit{#2}}
+}
+
+% Template for itemized lists
+% Usage: \begin{resume_list} [items] \end{resume_list}
+\newenvironment{resume_list}{
+  \vspace{-7pt}
+  \begin{itemize}[itemsep=-2px, parsep=1pt, leftmargin=30pt]
+}{
+  \end{itemize}
+}
+
+% Formats an item to use as an itemized title
+% Usage: \itemTitle{Title}
+\newcommand{\itemTitle}[1]{
+  \item[] \underline{#1}\vspace{4pt}
+}
+
+% Bullets used in itemized lists
+\renewcommand\labelitemi{--}
+
+%% END_FILE: mteck.sty
+%%%%%%%%%%%%%%%%%%%%%%
+
+%==================================%
+% Mohamad Kassem Moussa — CV (ES)  %
+%==================================%
+
+\numberedPages % NOTE: lastpage requires a second build
+\begin{document}
+
+  %---------%
+  % Heading %
+  %---------%
+
+  \documentTitle{Mohamad Kassem Moussa}{
+    \href{tel:+595972117118}{Tel: 0972 117118} ~|~
+    \href{mailto:moha251mmed@gmail.com}{moha251mmed@gmail.com} ~|~
+    \href{https://placaflaca00.github.io/CV/}{Portafolio: placaflaca00.github.io/CV} \\
+    \vspace{2pt}
+    \href{https://www.linkedin.com/in/mohamad-kassem-moussa-57b3261b8/}{LinkedIn: mohamad-kassem-moussa} ~|~
+    \href{https://github.com/Placaflaca00}{GitHub: Placaflaca00} ~|~
+    Paraguay
+  }
+
+  \documentSubtitle{Especialista en Inteligencia Artificial ~$\cdot$~ IA aplicada y automatización de procesos}
+
+  %--------%
+  % Perfil %
+  %--------%
+
+  \tinysection{Perfil}
+  Ingeniero de Sistemas (FPUNA, promedio 4.0) enfocado en \textbf{Inteligencia Artificial aplicada y automatización de procesos}. Llevé a producción un \textbf{asistente de ventas con IA} sobre un catálogo de \textbf{22.400 productos} para un equipo comercial mayorista, respondiendo con SKU, precio y stock reales; y modelos de visión por computadora desplegados en la nube (AWS) con CI/CD y monitoreo. Antes trabajé en \textbf{e-commerce y costos} en el rubro comercial, así que entiendo el proceso que la IA tiene que mejorar y no solamente el modelo. Busco aplicar herramientas de IA y automatización a operaciones reales: ventas, catálogo, atención al cliente y back office.
+
+  %-------------%
+  % Habilidades %
+  %-------------%
+
+  \section{Habilidades}
+
+  \begin{resume_list}
+    \item \textbf{IA y LLMs:} fine-tuning (QLoRA / LoRA), RAG y recuperación de información (BM25 / FTS5, embeddings), prompt engineering, diseño de evaluaciones y benchmarks, guardarraíles anti-alucinación, vLLM, Hugging Face, modelos open-source y APIs de modelos frontera
+    \item \textbf{Machine Learning y Visión:} PyTorch, TensorFlow, ONNX, Detectron2, SAM2, scikit-learn, OpenCV, Pandas, NumPy
+    \item \textbf{Automatización e integración:} n8n, Python, Bash / Shell Scripting, APIs REST con FastAPI, GitHub Actions (CI/CD), Docker, JavaScript, PHP, Java
+    \item \textbf{Datos e infraestructura:} PostgreSQL, SQLite / FTS5, AWS (Lambda, ECR, API Gateway, CloudWatch), Linux (Debian / Ubuntu), Git / GitHub, Streamlit, LaTeX, Microsoft Excel (certificado MOS) y PowerPoint
+    \item \textbf{Redes y seguridad:} VPN (WireGuard, ProtonVPN), Tailscale (Zero Trust, MFA, ACLs), SSH, Pi-hole
+    \item \textbf{Idiomas:} Árabe (nativo), Español (avanzado), Inglés (intermedio)
+    \item \textbf{Interpersonales:} trabajo en equipo multidisciplinario, comunicación y presentaciones técnicas, resolución de problemas complejos, autogestión y trabajo remoto, aprendizaje continuo
+  \end{resume_list}
+
+  %-------------------------%
+  % Experiencia Profesional %
+  %-------------------------%
+
+  \section{Experiencia Profesional}
+
+  \headingBf{Ingeniero de IA — Atacado Connect (Atacado Games)}{Junio -- Julio 2026}
+  \headingIt{Asistente de ventas con LLM para equipo comercial mayorista -- autor único}{}
+  \begin{resume_list}
+    \item Llevé a producción un \textbf{asistente de ventas con IA} para un equipo comercial de $\sim$70 personas: búsqueda en lenguaje natural sobre un catálogo de \textbf{22.400 productos}, respondiendo con SKU, precio y stock reales en lugar de texto genérico
+    \item Hice \textbf{fine-tuning de un modelo de 8B parámetros con QLoRA} sobre 2.172 conversaciones curadas: el benchmark reservado de 60 casos pasó de \textbf{88,3\% a 95,0\%} sin fallos críticos, entrenando sobre una sola GPU
+    \item Construí el \textbf{gate de despliegue} (evaluación automática de 60 casos, corte automático por contaminación de datos) y lo corrí sobre 5 versiones: \textbf{bloqueó 2 antes de producción}, cada una con su análisis causal escrito
+    \item Alcancé \textbf{96,0\% de recall real sobre 25.787 consultas} de un benchmark autoverificable que generé desde el propio catálogo (sin anotación manual); descarté un re-ranker neuronal después de \textbf{medir que su techo era +0,3 puntos}, ahorrando semanas de desarrollo
+    \item Serví el modelo en infraestructura propia con \textbf{vLLM} (FP8, prefix caching) sobre una sola GPU: \textbf{p50 de 2,2 s} en 309 turnos reales de producción y \textbf{80 pedidos concurrentes sin errores} en prueba de carga
+    \item Desarrollé además un \textbf{buscador de productos con IA para la tienda pública}: comparación, carrito, favoritos, enlaces compartibles y búsqueda por voz
+    \item Instrumenté \textbf{17 guardarraíles} y 85 puntos de traza a costo cero en tiempo de ejecución, y usé esa telemetría para identificar el cuello de botella real del proyecto (adopción, no calidad del modelo)
+  \end{resume_list}
+
+  \headingBf{Pasante de Investigación en IA / Visión por Computadora — Itaipu Parquetec (PTI)}{2024 -- 2026}
+  \headingIt{Beca de investigación -- inspección de líneas de transmisión con drones}{}
+  \begin{resume_list}
+    \item Construí un \textbf{dataset sintético de 50.000 imágenes} con máscaras de instancia autogeneradas (Detectron2 + SAM2), eliminando la anotación manual píxel a píxel a escala
+    \item Entrené un modelo de \textbf{segmentación de instancias de 18 clases} hasta \textbf{70,1\% de box mAP} / 64,5\% de mask mAP sobre un set reservado de 10.000 imágenes
+    \item Diseñé y prototipé un \textbf{motor de georreferenciación} que ubica cada detección a partir del GPS y los metadatos de orientación del dron
+    \item Desarrollé una \textbf{herramienta de anotación asistida por IA} (basada en SAM2) para imágenes y video, acelerando el flujo de etiquetado del equipo
+    \item Coordiné con el equipo de investigación y presenté resultados ante docentes e investigadores
+  \end{resume_list}
+
+  \headingBf{Monalisa}{Noviembre 2021 -- Enero 2022}
+  \headingIt{Oficina de Costos}{}
+  \begin{resume_list}
+    \item Elaboré listas de productos con descripciones y costos para su carga en la plataforma de comercio electrónico
+    \item Mantuve la base de datos de costos actualizada y consistente ante cambios y nuevos ingresos
+    \item Coordiné con el equipo de e-commerce la correcta implementación de los productos en el sistema
+  \end{resume_list}
+
+  \headingBf{Monalisa}{Noviembre 2020 -- Febrero 2021}
+  \headingIt{Oficina de E-commerce}{}
+  \begin{resume_list}
+    \item Gestioné y actualicé la carga de nuevos productos en el sistema utilizando la aplicación Compiere
+    \item Aseguré la precisión y consistencia de los datos de producto en la plataforma de comercio electrónico
+    \item Brindé soporte y resolví incidencias relacionadas con la carga y gestión de productos
+  \end{resume_list}
+
+  %-----------%
+  % Proyectos %
+  %-----------%
+
+  \section{Proyectos Destacados}
+
+  \headingBf{ConoceTuAve — Clasificador de cantos de aves en producción}{2026}
+  \headingIt{PyTorch, ONNX, AWS Lambda, GitHub Actions -- \href{https://huggingface.co/spaces/placaflaca/bird-classifier-py}{demo en vivo}}{}
+  \begin{resume_list}
+    \item Desplegué el modelo de punta a punta en \textbf{AWS Lambda} (ONNX, ECR + API Gateway) con \textbf{CI/CD por OIDC}, monitoreo en CloudWatch y un ciclo de reentrenamiento con consentimiento y revisión humana
+    \item \textbf{94,6\% de accuracy top-1} sobre 20 especies, \textbf{+9,8 puntos} por encima de una línea base justa de BirdNET
+  \end{resume_list}
+
+  \headingBf{Identificación de fases cristalinas por difracción de rayos X (XRD)}{2025}
+  \headingIt{Tesis de grado -- TensorFlow, PyMatGen, Streamlit}{}
+  \begin{resume_list}
+    \item CNN 1D multitarea que predice compuesto, sistema cristalino y parámetros de celda unitaria desde un único patrón XRD: \textbf{89,4\% de accuracy de compuesto} (18 clases) y \textbf{97,9\% de sistema cristalino} (6 clases)
+    \item Entrenada \textbf{íntegramente con espectros sintéticos} simulados desde archivos CIF, sin dependencia de datos reales; publicada como aplicación web en Streamlit
+  \end{resume_list}
+
+  \headingBf{Servidor multimedia automatizado con Raspberry Pi 5}{2025}
+  \headingIt{Proyecto propio de infraestructura, automatización y seguridad}{}
+  \begin{resume_list}
+    \item Automaticé un stack completo en \textbf{Docker} (Radarr, Sonarr, Prowlarr, Jellyfin) con almacenamiento en OpenMediaVault y SMB/CIFS
+    \item Implementé seguridad de red: VPN con kill-switch e interface binding, acceso remoto \textbf{Zero Trust con Tailscale} (MFA y ACLs) y Pi-hole para filtrado de DNS en toda la red
+  \end{resume_list}
+
+  %-----------%
+  % Educación %
+  %-----------%
+
+  \section{Educación}
+
+  \headingBf{Facultad Politécnica — Universidad Nacional de Asunción (FPUNA)}{2021 -- 2026}
+  \headingIt{Ingeniería de Sistemas -- Promedio: 4.0}{}
+  \headingIt{Carrera concluida -- tesis en proceso de defensa}{}
+  \headingIt{Tesis: ``Uso de inteligencia artificial para identificar materiales por difracción de rayos X''}{}
+
+  %--------------------------%
+  % Certificaciones y Cursos %
+  %--------------------------%
+
+  \section{Certificaciones y Congresos}
+
+  \begin{resume_list}
+    \item \textbf{Microsoft Office Specialist — Excel 2016} -- Microsoft / Certiport (Nov. 2019, credencial UGxL-sFMp, verificable en línea)
+    \item \textbf{Microsoft PowerPoint} -- Certificación Microsoft (instructor certificado)
+    \item \textbf{Machine Learning with Python} y \textbf{Python for Everybody} -- freeCodeCamp
+    \item \textbf{Google Summit: IA for Education} -- Google (2024)
+    \item \textbf{III Congreso Paraguayo de Informática: hacia una IA ética y explicable} -- XXI Encuentro Científico Tecnológico (octubre 2025)
+    \item \textbf{Presentación de tesis} -- II Encontro de Física Aplicada na Tríplice Fronteira, UNILA, Foz do Iguaçu, Brasil (2025)
+    \item \textbf{Certificado de Oratoria} -- comunicación y presentaciones efectivas (2024)
+  \end{resume_list}
+
+  %--------------%
+  % Voluntariado %
+  %--------------%
+
+  \section{Voluntariado}
+
+  \headingBf{Facultad Politécnica (FPUNA) — Instructor de Microsoft PowerPoint}{Marzo -- Abril 2021}
+  \begin{resume_list}
+    \item Diseñé e impartí un curso completo para estudiantes universitarios, con material didáctico y ejercicios prácticos propios
+    \item Brindé soporte técnico y asistencia personalizada para que los participantes lograran presentaciones efectivas
+  \end{resume_list}
+
+\end{document}

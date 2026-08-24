@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="ac.title">LLM sales assistant at Atacado Connect — Case study · Mohamad</title>
+  <meta name="description" content="AI Engineer at Atacado Connect: an internal LLM sales assistant shipped to a ~70-person wholesale floor — retrieval over a 20K-SKU catalog, a fine-tuned Qwen3-8B self-hosted on vLLM, and the evaluation harness that gated every release." />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0c0c0e" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="An LLM sales assistant, shipped — Atacado Connect" />
+  <meta property="og:description" content="Fine-tuned Qwen3-8B, lexical retrieval over 20K SKUs, self-hosted on vLLM, and a release gate that blocked two of my own models." />
+  <meta property="og:image" content="assets/og-image.svg" />
+
+  <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Epilogue:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/case-atacado.css" />
+</head>
+
+<body class="theme-atc">
+  <a class="skip-link" href="#case" data-i18n="skip">Skip to content</a>
+
+  <svg class="svg-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="ui-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></symbol>
+    <symbol id="ui-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></symbol>
+    <symbol id="ui-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></symbol>
+    <symbol id="ui-external" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></symbol>
+    <symbol id="ui-menu" viewBox="0 0 24 24"><path d="M3 9h18"/><path d="M3 15h18"/></symbol>
+    <symbol id="ui-close" viewBox="0 0 24 24"><path d="M6 6 18 18"/><path d="M18 6 6 18"/></symbol>
+    <symbol id="ti-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+  </svg>
+
+  <div class="fx" aria-hidden="true">
+    <div class="fx__glow"></div>
+    <div class="fx__grain"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav" aria-label="Primary">
+        <a class="nav__brand" href="index.html" aria-label="Mohamad — home">
+          <svg class="nav__mark" viewBox="0 0 32 32" aria-hidden="true">
+            <defs><linearGradient id="navg" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#00e21c"/><stop offset=".5" stop-color="#00c417"/><stop offset="1" stop-color="#00a814"/>
+            </linearGradient></defs>
+            <rect x="1" y="1" width="30" height="30" rx="7.5" fill="#141417" stroke="url(#navg)" stroke-width="1.5" stroke-opacity=".55"/>
+            <path d="M8 23V9.5l8 8 8-8V23" fill="none" stroke="url(#navg)" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <b>Mohamad</b><span class="dot">.</span>
+        </a>
+
+        <ul class="nav__links" id="nav-links">
+          <li><a class="nav__link" href="index.html#about" data-i18n="nav.about"><i>01</i> About</a></li>
+          <li><a class="nav__link" href="index.html#skills" data-i18n="nav.stack"><i>02</i> Stack</a></li>
+          <li><a class="nav__link" href="index.html#work" data-i18n="nav.work"><i>03</i> Work</a></li>
+          <li><a class="nav__link" href="index.html#experience" data-i18n="nav.exp"><i>04</i> Experience</a></li>
+          <li><a class="nav__link" href="index.html#contact" data-i18n="nav.contact"><i>05</i> Contact</a></li>
+        </ul>
+
+        <div class="nav__right">
+          <button class="lang-toggle" type="button" aria-label="Cambiar a español">
+            <span class="lt-en">EN</span><span class="lt-es">ES</span>
+          </button>
+          <span class="status" data-i18n="status.avail"><span class="status__dot" aria-hidden="true"></span> Available for work</span>
+          <button class="nav__toggle" type="button" aria-label="Open menu" data-i18n-aria="aria.menu" aria-expanded="false" aria-controls="nav-links">
+            <svg class="ico ico--menu" aria-hidden="true"><use href="#ui-menu"/></svg>
+            <svg class="ico ico--close" aria-hidden="true" hidden><use href="#ui-close"/></svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="case">
+    <div class="container backbar">
+      <a class="back-link" href="index.html#experience" data-i18n="back.exp"><svg class="ico" aria-hidden="true"><use href="#ui-arrow-left"/></svg> All experience</a>
+    </div>
+
+    <!-- Case hero -->
+    <section class="case-hero">
+      <div class="container">
+        <p class="eyebrow reveal" data-i18n="ac.eyebrow">Case study · AI Engineer · Wholesale e-commerce</p>
+        <h1 class="case-title reveal" style="--i:1" data-i18n="ac.h1">An LLM sales assistant, <span class="grad-text">shipped</span> to a wholesale floor</h1>
+        <p class="case-lead reveal" style="--i:2" data-i18n="ac.lead">
+          Two months at <b>Atacado Connect</b> as sole AI engineer: an internal assistant that answers a
+          seller in plain language — <i>&ldquo;customer wants something for gaming between 200 and 300&rdquo;</i> —
+          with <b>real products only</b>, each carrying its SKU, price and stock. A <b>fine-tuned Qwen3-8B</b>
+          self-hosted on one RTX&nbsp;5090, lexical retrieval over a <b>~20K-SKU catalog</b>, and the
+          evaluation harness that gated every release — including the two versions it refused.
+        </p>
+
+        <div class="atc-brand reveal" style="--i:3">
+          <img class="atc-brand__logo" src="assets/img/atacado-connect.svg" alt="Atacado Connect" width="2056" height="361" />
+          <span class="atc-brand__sep" aria-hidden="true"></span>
+          <p class="atc-brand__meta" data-i18n="ac.brandmeta">
+            <b>AI Engineer</b><br />Jun — Jul 2026 · Paraguay
+          </p>
+        </div>
+
+        <dl class="case-meta reveal" style="--i:4" data-i18n="ac.meta">
+          <div><dt>Year</dt><dd class="tnum">2026</dd></div>
+          <div><dt>Type</dt><dd>AI Engineer · 2-month engagement</dd></div>
+          <div><dt>Role</dt><dd>Sole author — data, retrieval, fine-tuning, serving, app</dd></div>
+          <div><dt>Stack</dt><dd>Qwen3-8B · QLoRA · vLLM · FastAPI · SQLite</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Overview -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head reveal"><h2 data-i18n="ov.h2">Overview</h2><span class="section__rule"></span></div>
+        <ul class="thesis-points reveal" data-i18n="ac.points">
+          <li><b>Shipped an internal LLM sales agent to production</b> for a wholesale sales team — natural-language product search over a <b>22.4K-product catalog</b>, answering with real SKUs, prices and stock, and never inventing a product or a delivery date.</li>
+          <li><b>Fine-tuned Qwen3-8B with QLoRA</b> (LoRA r=32; <b>87M trainable parameters, 1.05%</b> of the model) on <b>2,172 curated multi-turn tool-calling trajectories</b>, lifting a 60-case held-out benchmark from <b>88.3% to 95.0% with zero critical failures</b> — and cutting the model&rsquo;s dependence on scaffolding, the gap between the guarded agent and the bare model, <b>from 21.6 to 6.7 points</b>.</li>
+          <li><b>Built the release gate</b> — 60 held-out cases across 17 dimensions, fully mechanical graders, critical-failure weighting and <b>automatic abort on train/test contamination</b> — and ran it on five fine-tuned versions. <b>It blocked two of my own models from production</b>, with the causal write-up to justify each call.</li>
+          <li><b>Designed a self-verifying retrieval benchmark</b>: <b>26,594 generated queries over 8,605 products</b>, where the product itself is the ground truth — zero human annotation, about <b>US$4</b> to build.</li>
+          <li><b>Self-hosted the model on vLLM</b> (FP8, prefix caching, 16K context) on a single RTX 5090: <b>p50 2.2s end-to-end at 128.7 tok/s</b> across 309 real production turns, and <b>80 concurrent agent loops at 2.71 q/s with zero errors</b> in load testing.</li>
+          <li><b>Sole author across the whole stack</b> — data cleaning, retrieval engine, fine-tuning pipeline, serving, backend and frontend: <b>278 commits and ~60K hand-written lines in seven weeks</b>, with 23 offline test scripts and ~600 assertions.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- The two projects -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head reveal"><h2 data-i18n="ac.proj.h2">Two products</h2><span class="section__rule"></span></div>
+
+        <div class="atc-projects">
+          <article class="atc-proj atc-proj--shipped reveal">
+            <span class="atc-proj__status" data-i18n="ac.p1.status">In production</span>
+            <h3 class="atc-proj__title" data-i18n="ac.p1.title">Internal assistant for the sales floor</h3>
+            <p class="atc-proj__desc" data-i18n="ac.p1.desc">
+              A chat assistant the sellers use while a customer is on the line. It reads the request in
+              Spanish or Portuguese, searches the live catalog, and answers with <b>real products only</b> —
+              SKU, price and stock on every line.
+            </p>
+            <ul class="atc-feat" data-i18n="ac.p1.feat">
+              <li>Tool-use agent loop, provider-agnostic — the same code runs against the local model or a frontier API, which is what makes comparing them honest.</li>
+              <li><b>16 named response guardrails</b> re-check the finished answer against what the tools actually returned: invented SKUs, prices copied off the wrong product, out-of-stock recommendations.</li>
+              <li>Lexical retrieval (SQLite FTS5/BM25) with deterministic attribute filters for RAM, storage, screen size and battery.</li>
+              <li>Streaming responses, admin panel, review queue, and a step-by-step X-ray of the internal pipeline for debugging.</li>
+            </ul>
+            <p class="atc-proj__foot" data-i18n="ac.p1.foot">
+              Deployed to a ~70-person sales team · 56 used it · peak day 28
+            </p>
+          </article>
+
+          <article class="atc-proj reveal" style="--i:1">
+            <span class="atc-proj__status" data-i18n="ac.p2.status">Built · not deployed</span>
+            <h3 class="atc-proj__title" data-i18n="ac.p2.title">AI product finder for the storefront</h3>
+            <p class="atc-proj__desc" data-i18n="ac.p2.desc">
+              A customer-facing version of the same brain: you type <i>&ldquo;I want a notebook&rdquo;</i> on the public
+              site and it returns real product cards instead of a keyword result page. Built on the
+              <b>same fine-tuned model and retrieval stack</b> as the internal assistant.
+            </p>
+            <ul class="atc-feat" data-i18n="ac.p2.feat">
+              <li>Natural-language search that returns product cards, not a list of links.</li>
+              <li>Side-by-side comparison of two products and their specs.</li>
+              <li>Add to cart and save to favourites, straight from the answer.</li>
+              <li>Shareable links for a single product or a whole cart.</li>
+              <li>Voice input — a Whisper large-v3-turbo sharing the same GPU as the language model.</li>
+            </ul>
+            <p class="atc-proj__foot" data-i18n="ac.p2.foot">
+              Completed and handed over · not released during my engagement
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head reveal"><h2 data-i18n="res.h2">Results</h2><span class="section__rule"></span></div>
+        <section class="atc reveal">
+
+          <div class="grid4" data-i18n="ac.grid"><div class="card acc"><div class="v">95.0<span>%</span></div><div class="l">Held-out benchmark<br>0 critical failures</div></div><div class="card acc"><div class="v">96.0<span>%</span></div><div class="l">True retrieval recall<br>25,787 queries judged</div></div><div class="card edge"><div class="v">2.2<span>s</span></div><div class="l">Production p50<br>309 real turns</div></div><div class="card"><div class="v">80<span></span></div><div class="l">Concurrent loops<br>0 errors, load test</div></div></div>
+
+          <div class="sect">
+            <div>
+              <div class="block-h" data-i18n="ac.b1h">The release gate</div>
+              <div class="block-note" data-i18n="ac.b1n">Every fine-tuned version ran the same 60 held-out cases in two modes: inside the guarded agent, and as the <b>bare model with no scaffolding</b>. A single critical failure — an invented SKU, a denied sale on real stock, a broken jailbreak — marks a version unfit regardless of its score.</div>
+              <div class="gate-legend" data-i18n="ac.legend"><span><i class="ag"></i>inside the agent</span><span><i class="bare"></i>bare model</span></div>
+              <div class="gate" data-i18n="ac.gate">
+                <div class="grow">
+                  <span class="gv">ft-v1</span>
+                  <div class="gbars">
+                    <div class="gbar"><div class="gtrack"><div class="gfill ag" style="--w:88.3%"></div></div><span class="gnum">88.3</span></div>
+                    <div class="gbar"><div class="gtrack"><div class="gfill bare" style="--w:66.7%"></div></div><span class="gnum">66.7</span></div>
+                  </div>
+                  <span class="gverdict">3 critical</span>
+                </div>
+                <div class="grow">
+                  <span class="gv">ft-v2</span>
+                  <div class="gbars">
+                    <div class="gbar"><div class="gtrack"><div class="gfill ag" style="--w:88.3%"></div></div><span class="gnum">88.3</span></div>
+                    <div class="gbar"><div class="gtrack"><div class="gfill bare" style="--w:70.0%"></div></div><span class="gnum">70.0</span></div>
+                  </div>
+                  <span class="gverdict">2 critical</span>
+                </div>
+                <div class="grow pass">
+                  <span class="gv">ft-v3</span>
+                  <div class="gbars">
+                    <div class="gbar"><div class="gtrack"><div class="gfill ag" style="--w:95.0%"></div></div><span class="gnum">95.0</span></div>
+                    <div class="gbar"><div class="gtrack"><div class="gfill bare" style="--w:88.3%"></div></div><span class="gnum">88.3</span></div>
+                  </div>
+                  <span class="gverdict">shipped</span>
+                </div>
+                <div class="grow">
+                  <span class="gv">ft-v4</span>
+                  <div class="gbars">
+                    <div class="gbar"><div class="gtrack"><div class="gfill ag" style="--w:90.0%"></div></div><span class="gnum">90.0</span></div>
+                    <div class="gbar"><div class="gtrack"><div class="gfill bare" style="--w:90.0%"></div></div><span class="gnum">90.0</span></div>
+                  </div>
+                  <span class="gverdict">blocked</span>
+                </div>
+                <div class="grow">
+                  <span class="gv">ft-v4.1</span>
+                  <div class="gbars">
+                    <div class="gbar"><div class="gtrack"><div class="gfill ag" style="--w:90.0%"></div></div><span class="gnum">90.0</span></div>
+                    <div class="gbar"><div class="gtrack"><div class="gfill bare" style="--w:85.0%"></div></div><span class="gnum">85.0</span></div>
+                  </div>
+                  <span class="gverdict">blocked</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="block-h" data-i18n="ac.b2h">When the metric was the bug</div>
+              <div class="block-note" data-i18n="ac.b2n">My retrieval harness reported <b>90.7% recall</b> and I nearly spent a week fixing the engine. Instead I audited the instrument: a <b>blind LLM judge</b> that sees the query and the returned products but <b>never the expected label</b> — because the label was exactly what I suspected was wrong.</div>
+              <div class="flow" data-i18n="ac.flow">
+                <div class="node"><div class="nt">Harness reported</div><div class="nv">90.7% <small>recall — 2,396 declared failures</small></div></div>
+                <div class="arrow">▼</div>
+                <div class="node mid"><div class="nt">Blind judge · label hidden</div><div class="nv"><b>1,286 of 2,396 failures (54%) were false</b><small> — a correct engine penalised by a stale taxonomy</small></div></div>
+                <div class="arrow">▼</div>
+                <div class="node"><div class="nt">True recall</div><div class="nv">96.0% <small>across 25,787 evaluated queries</small></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="foot">
+            <div class="stack">
+              <span class="chip">Qwen3-8B</span><span class="chip">Unsloth · QLoRA</span><span class="chip">vLLM · FP8</span>
+              <span class="chip">FastAPI</span><span class="chip">SQLite FTS5</span><span class="chip">RTX 5090</span>
+            </div>
+            <div class="note" data-i18n="ac.footnote">benchmark n=60 held-out, run in two modes · retrieval recall on a <b>synthetic</b> benchmark, not labelled production traffic</div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Honest notes -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head reveal"><h2 data-i18n="ac.notes.h2">What I actually learned</h2><span class="section__rule"></span></div>
+        <p class="skills__intro reveal" data-i18n="ac.notes.intro">Most of the results I am proudest of are negative, and measured. Each of these is a decision I made <i>not</i> to ship something, backed by a number.</p>
+
+        <dl class="atc-notes reveal">
+          <div class="atc-note" data-i18n="ac.n1">
+            <dt>I blocked two of my own models</dt>
+            <dd>Versions 4 and 4.1 scored better <b>as standalone models</b> and worse <b>inside the production agent</b>, with a repeatable Portuguese jailbreak regression. That pattern told me the SFT-mixture lever was exhausted rather than mis-tuned — so I wrote up why instead of shipping a higher number.</dd>
+          </div>
+          <div class="atc-note" data-i18n="ac.n2">
+            <dt>I killed a feature before building it</dt>
+            <dd>I computed a neural re-ranker&rsquo;s ceiling first: <b>+0.3 points</b>. <b>96% of failures had no correct product anywhere in the top-50</b> — a recall problem, not a ranking one. The re-ranker was never built.</dd>
+          </div>
+          <div class="atc-note" data-i18n="ac.n3">
+            <dt>I ran GRPO, and it failed — measurably</dt>
+            <dd>120 steps, 7.6M tokens: <b>85.8% of steps had zero reward variance</b>, so there was no policy gradient at all, with 53.7% of completions truncated and a non-zero reference KL exposing the wrong reference policy. Upstream, a 665-prompt screen showed <b>66.9% were already solved 8 times out of 8</b> — supervised training had saturated the signal RL needed. I halted the pipeline at its data gate instead of spending GPU.</dd>
+          </div>
+          <div class="atc-note" data-i18n="ac.n4">
+            <dt>Embeddings were a measured &ldquo;no&rdquo;</dt>
+            <dd>I ran <code>multilingual-e5-large</code> (1024-dim) on <b>ONNX, no PyTorch</b>, and recommended against adopting it. The vector space clusters by <b>brand at 95%</b> (18% by chance — 5.3&times;) but by <b>RAM at only 59%</b> (34% by chance — 1.7&times;): it organises by manufacturer, not by specification. On exact numeric specs it reached <b>50% precision@10 against 100%</b> from the deterministic filter I already had. I also showed <b>no vector database was warranted</b> — searching 22,427 vectors takes <b>2.2&nbsp;ms in numpy</b>. No FAISS, no Chroma.</dd>
+          </div>
+          <div class="atc-note" data-i18n="ac.n5">
+            <dt>The real bottleneck was adoption, not the model</dt>
+            <dd>Instrumenting the guardrails told me something I did not want to hear: <b>6 human votes across 327 responses</b>. With that little signal I could not tell whether any change helped, so I stopped shipping model changes and said so. Knowing a metric is too thin to act on is worth more than another point of benchmark.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Concepts -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head reveal"><h2 data-i18n="ac.cn.h2">What I worked with</h2><span class="section__rule"></span></div>
+        <p class="skills__intro reveal" data-i18n="ac.cn.intro">Everything below is something the codebase actually uses or measures &mdash; not a reading list.</p>
+
+        <div class="atc-concepts">
+          <div class="atc-cgroup reveal">
+            <h3 data-i18n="ac.cn.g1h">LLMs &amp; training</h3>
+            <ul class="atc-clist" data-i18n="ac.cn.g1">
+              <li>Attention in Transformers</li><li>QLoRA / LoRA rank / trainable-parameter ratio</li><li>Label masking (<code>train_on_responses_only</code>) and verifying it</li><li>Train/serve chat-template parity</li><li>Rejection sampling (RFT / STaR)</li><li>LLM-as-judge with generator&nbsp;&ne;&nbsp;judge separation</li><li>Train/test contamination checks</li><li>GRPO, KTO, DAPO</li><li>Reward variance &amp; the KL reference policy</li>
+            </ul>
+          </div>
+          <div class="atc-cgroup reveal" style="--i:1">
+            <h3 data-i18n="ac.cn.g2h">Serving &amp; inference</h3>
+            <ul class="atc-clist" data-i18n="ac.cn.g2">
+              <li>vLLM</li><li>Continuous batching</li><li>PagedAttention</li><li>Prefix caching</li><li>KV-cache sizing</li><li>FP8 and 4-bit quantisation</li><li>CUDA graphs vs eager</li><li>Concurrency control</li>
+            </ul>
+          </div>
+          <div class="atc-cgroup reveal" style="--i:2">
+            <h3 data-i18n="ac.cn.g3h">Retrieval</h3>
+            <ul class="atc-clist" data-i18n="ac.cn.g3">
+              <li>BM25 / FTS5 with per-column weights</li><li>Deterministic attribute filters</li><li>Embeddings &mdash; cluster coherence, PCA / effective dimensionality</li><li>RAG</li><li>CAG (cache-augmented generation)</li><li>Tool calling</li><li>Structured output / constrained decoding</li>
+            </ul>
+          </div>
+          <div class="atc-cgroup reveal" style="--i:3">
+            <h3 data-i18n="ac.cn.g4h">Evaluation</h3>
+            <ul class="atc-clist" data-i18n="ac.cn.g4">
+              <li>Self-verifying benchmarks</li><li>Blind judges</li><li>Paired bootstrap &amp; 95% confidence intervals</li><li>McNemar&rsquo;s test</li><li>Deploy gates with severity weighting</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Source -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head reveal"><h2 data-i18n="ac.src.h2">Source</h2><span class="section__rule"></span></div>
+        <p class="skills__intro reveal" data-i18n="ac.src.intro">The company&rsquo;s catalog, prices, chat logs and model weights are theirs and are not published. What is public is a <b>sanitised, reusable template</b> of the system I built — the agent loop, the guardrails, the search engine, the full fine-tuning and evaluation pipeline, and the post-mortems — with every trace of real data removed.</p>
+        <div class="reveal" style="--i:1">
+          <a class="btn btn--ghost" href="https://github.com/Placaflaca00/catalog-sales-agent" target="_blank" rel="noopener" data-i18n="gh.src">
+            <svg class="brand-ico" aria-hidden="true"><use href="#ti-github"/></svg> Source on GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back -->
+    <section class="section--tight">
+      <div class="container">
+        <a class="btn btn--ghost reveal" href="index.html#experience" data-i18n="back.expbtn"><svg class="ico" aria-hidden="true"><use href="#ui-arrow-left"/></svg> Back to experience</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer__note" data-i18n="foot.note">Designed &amp; coded by Mohamad — <span data-year>2026</span>.</p>
+      <p class="footer__built" data-i18n="ac.foot.built">Case study · LLM sales assistant at Atacado Connect.</p>
+      <a class="footer__top" href="#case" data-i18n="foot.top">Back to top <svg class="ico" aria-hidden="true"><use href="#ui-arrow-up"/></svg></a>
+    </div>
+  </footer>
+
+  <script src="assets/js/i18n.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+</body>
+</html>

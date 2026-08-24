@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="pt.title">Drone CV on transmission lines — Case study · Mohamad</title>
+  <meta name="description" content="Computer-vision research internship at Itaipu Parquetec: an 18-class instance-segmentation system (SAM2 + Detectron2) detecting electrical components on high-voltage lines from drone imagery, trained on synthetic data." />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0c0c0e" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Drone-based component detection on transmission lines" />
+  <meta property="og:description" content="An 18-class SAM2 + Detectron2 instance-segmentation system trained on synthetic data, at Itaipu Parquetec." />
+  <meta property="og:image" content="assets/og-image.svg" />
+
+  <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Epilogue:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/case-pti.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#case" data-i18n="skip">Skip to content</a>
+
+  <svg class="svg-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="ui-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></symbol>
+    <symbol id="ui-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></symbol>
+    <symbol id="ui-menu" viewBox="0 0 24 24"><path d="M3 9h18"/><path d="M3 15h18"/></symbol>
+    <symbol id="ui-close" viewBox="0 0 24 24"><path d="M6 6 18 18"/><path d="M18 6 6 18"/></symbol>
+  </svg>
+
+  <div class="fx" aria-hidden="true">
+    <div class="fx__glow"></div>
+    <div class="fx__grain"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav" aria-label="Primary">
+        <a class="nav__brand" href="index.html" aria-label="Mohamad — home">
+          <svg class="nav__mark" viewBox="0 0 32 32" aria-hidden="true">
+            <defs><linearGradient id="navg" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#8b5cf6"/><stop offset=".5" stop-color="#6366f1"/><stop offset="1" stop-color="#3b82f6"/>
+            </linearGradient></defs>
+            <rect x="1" y="1" width="30" height="30" rx="7.5" fill="#141417" stroke="url(#navg)" stroke-width="1.5" stroke-opacity=".55"/>
+            <path d="M8 23V9.5l8 8 8-8V23" fill="none" stroke="url(#navg)" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <b>Mohamad</b><span class="dot">.</span>
+        </a>
+
+        <ul class="nav__links" id="nav-links">
+          <li><a class="nav__link" href="index.html#about" data-i18n="nav.about"><i>01</i> About</a></li>
+          <li><a class="nav__link" href="index.html#skills" data-i18n="nav.stack"><i>02</i> Stack</a></li>
+          <li><a class="nav__link" href="index.html#work" data-i18n="nav.work"><i>03</i> Work</a></li>
+          <li><a class="nav__link" href="index.html#experience" data-i18n="nav.exp"><i>04</i> Experience</a></li>
+          <li><a class="nav__link" href="index.html#contact" data-i18n="nav.contact"><i>05</i> Contact</a></li>
+        </ul>
+
+        <div class="nav__right">
+          <button class="lang-toggle" type="button" aria-label="Cambiar a español">
+            <span class="lt-en">EN</span><span class="lt-es">ES</span>
+          </button>
+          <span class="status" data-i18n="status.avail"><span class="status__dot" aria-hidden="true"></span> Available for work</span>
+          <button class="nav__toggle" type="button" aria-label="Open menu" data-i18n-aria="aria.menu" aria-expanded="false" aria-controls="nav-links">
+            <svg class="ico ico--menu" aria-hidden="true"><use href="#ui-menu"/></svg>
+            <svg class="ico ico--close" aria-hidden="true" hidden><use href="#ui-close"/></svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="case">
+    <div class="container backbar">
+      <a class="back-link" href="index.html#work" data-i18n="back.all"><svg class="ico" aria-hidden="true"><use href="#ui-arrow-left"/></svg> All work</a>
+    </div>
+
+    <!-- Case hero -->
+    <section class="case-hero">
+      <div class="container">
+        <p class="eyebrow reveal" data-i18n="pt.eyebrow">Case study · Computer Vision · Research internship</p>
+        <h1 class="case-title reveal" style="--i:1" data-i18n="pt.h1">Drone-based <span class="grad-text">component detection</span> on power transmission lines</h1>
+        <p class="case-lead reveal" style="--i:2" data-i18n="pt.lead">
+          An <b>18-class instance-segmentation</b> system (Meta&rsquo;s SAM2 + Detectron2) that detects
+          and geolocates electrical hardware on high-voltage lines from drone imagery — trained on a
+          <b>synthetic dataset with auto-generated masks</b>, at Itaipu Parquetec (PTI).
+        </p>
+
+        <dl class="case-meta reveal" style="--i:3" data-i18n="pt.meta">
+          <div><dt>Year</dt><dd class="tnum">2024 — 2026</dd></div>
+          <div><dt>Type</dt><dd>Research internship · Itaipu Parquetec</dd></div>
+          <div><dt>Role</dt><dd>ML / CV Research Intern</dd></div>
+          <div><dt>Stack</dt><dd>SAM2 · Detectron2 · PyTorch</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Overview (bullet points) -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head reveal"><h2 data-i18n="ov.h2">Overview</h2><span class="section__rule"></span></div>
+        <ul class="thesis-points reveal" data-i18n="pt.points">
+          <li><b>Researched and selected the model stack</b> (Meta&rsquo;s SAM2 + Detectron2) for an automated drone-based system that detects and geolocates electrical components on high-voltage transmission lines.</li>
+          <li><b>Engineered a synthetic data-generation pipeline</b> that composites component instances with auto-generated segmentation masks, producing a <b>50K-image dataset</b> (40K train / 10K test) — eliminating manual per-pixel annotation at scale.</li>
+          <li><b>Fine-tuned an 18-class Detectron2 instance-segmentation model</b> on the synthetic set, reaching <b>70.1% box mAP</b> (84.1% AP50) and <b>64.5% mask mAP</b> on a 10K held-out test set.</li>
+          <li><b>Built an interactive SAM2-based annotation tool</b> for images and video to bootstrap the initial labelling workflow.</li>
+          <li><b>Designed and prototyped the georeferencing engine:</b> from DJI drone GPS + orientation metadata it localizes each detected component and resolves its transmission line and tower-to-tower span (5–7 conductors per span). Production frontend/backend built by the engineering team.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Sample detections (real field output) -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head reveal"><h2 data-i18n="pt.shots.h2">Sample detections</h2><span class="section__rule"></span></div>
+        <p class="skills__intro reveal" data-i18n="pt.shots.intro">Real model output on held-out field imagery — instance masks and detection boxes drawn by the fine-tuned Detectron2 model on drone photos of live transmission lines.</p>
+        <div class="shots">
+          <figure class="shot reveal">
+            <button class="shot__zoom" type="button" data-zoom aria-label="Open image full size" data-i18n-aria="aria.zoom">
+              <img src="assets/img/cv-espacador.jpg" alt="Drone photo of a spacer on a transmission span, segmented in green and labelled Espaçador" loading="lazy" width="1280" height="960" />
+            </button>
+            <figcaption data-i18n="pt.fig1"><b>Espaçador</b> (spacer) — instance mask + detection box on a multi-conductor span.</figcaption>
+          </figure>
+          <figure class="shot reveal" style="--i:1">
+            <button class="shot__zoom" type="button" data-zoom aria-label="Open image full size" data-i18n-aria="aria.zoom">
+              <img src="assets/img/cv-conector.jpg" alt="Drone photo of a connector where two conductors cross, segmented in green and labelled Conector 99%" loading="lazy" width="1280" height="720" />
+            </button>
+            <figcaption data-i18n="pt.fig2"><b>Conector</b> — 99% confidence where a clamp joins crossing conductors.</figcaption>
+          </figure>
+          <figure class="shot reveal" style="--i:2">
+            <button class="shot__zoom" type="button" data-zoom aria-label="Open image full size" data-i18n-aria="aria.zoom">
+              <img src="assets/img/cv-connector2.jpg" alt="Drone photo of a connector on a single conductor, segmented in blue and labelled connector2 99%" loading="lazy" width="1280" height="720" />
+            </button>
+            <figcaption data-i18n="pt.fig3"><b>Connector2</b> — 99% confidence, instance segmentation on a single conductor.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results (frameless dashboard, single violet system) -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head reveal"><h2 data-i18n="res.h2">Results</h2><span class="section__rule"></span></div>
+        <section class="pti reveal">
+          <div class="head" data-i18n="pt.head">
+            <div class="kick">Computer Vision · Itaipu Parquetec</div>
+            <h1 class="title">Drone-based <em>component detection</em><br>on power transmission lines</h1>
+            <p class="sub">An <b>18-class instance-segmentation</b> system (Meta <b>SAM2</b> + <b>Detectron2</b>) that detects and segments electrical hardware on high-voltage lines from drone imagery, fine-tuned on a <b>synthetic dataset with auto-generated masks</b>.</p>
+          </div>
+
+          <div class="grid4" data-i18n="pt.grid"><div class="card acc"><div class="v">70.1<span>%</span></div><div class="l">Box mAP<br>IoU 0.50:0.95</div></div><div class="card acc"><div class="v">64.5<span>%</span></div><div class="l">Mask mAP<br>instance segmentation</div></div><div class="card edge"><div class="v">50K<span></span></div><div class="l">Synthetic dataset<br>auto-generated masks</div></div><div class="card "><div class="v">18<span></span></div><div class="l">Component classes<br>detected + segmented</div></div></div>
+
+          <div class="sect">
+            <div>
+              <div class="block-h" data-i18n="pt.b1h">Detection accuracy by IoU threshold</div>
+              <div class="block-note" data-i18n="pt.b1n">COCO-style mAP for detection (box) and instance segmentation (mask), on a 10K synthetic held-out test set.</div>
+              <div class="legend" data-i18n="pt.legend"><span><i class="box"></i>bounding box</span><span><i class="msk"></i>segmentation mask</span></div>
+              <div class="mg">
+                  <div class="mg-head"><span class="mg-l">mAP</span><span class="mg-s">IoU 0.50:0.95</span></div>
+                  <div class="mg-bar"><div class="mg-track"><div class="mg-fill box" style="--w:70.12%"></div></div><div class="mg-v box">70.1<span>%</span></div></div>
+                  <div class="mg-bar"><div class="mg-track"><div class="mg-fill msk" style="--w:64.46%"></div></div><div class="mg-v msk">64.5<span>%</span></div></div>
+                </div><div class="mg">
+                  <div class="mg-head"><span class="mg-l">AP50</span><span class="mg-s">IoU = 0.50</span></div>
+                  <div class="mg-bar"><div class="mg-track"><div class="mg-fill box" style="--w:84.09%"></div></div><div class="mg-v box">84.1<span>%</span></div></div>
+                  <div class="mg-bar"><div class="mg-track"><div class="mg-fill msk" style="--w:82.87%"></div></div><div class="mg-v msk">82.9<span>%</span></div></div>
+                </div><div class="mg">
+                  <div class="mg-head"><span class="mg-l">AP75</span><span class="mg-s">IoU = 0.75</span></div>
+                  <div class="mg-bar"><div class="mg-track"><div class="mg-fill box" style="--w:80.1%"></div></div><div class="mg-v box">80.1<span>%</span></div></div>
+                  <div class="mg-bar"><div class="mg-track"><div class="mg-fill msk" style="--w:75.37%"></div></div><div class="mg-v msk">75.4<span>%</span></div></div>
+                </div>
+            </div>
+            <div>
+              <div class="block-h" data-i18n="pt.b2h">Data pipeline</div>
+              <div class="block-note" data-i18n="pt.b2n">Solved label scarcity by generating training data with masks created automatically &mdash; no manual per-pixel annotation at scale.</div>
+              <div class="flow" data-i18n="pt.flow">
+                <div class="node"><div class="nt">Base · real imagery</div><div class="nv">1,006 <small>annotated images → 2,895 augmented</small></div></div>
+                <div class="arrow">▼</div>
+                <div class="node mid"><div class="nt">Synthetic generation · auto-masks</div><div class="nv">composited instances + pixel-perfect masks</div></div>
+                <div class="arrow">▼</div>
+                <div class="node"><div class="nt">Fine-tuning dataset</div><div class="nv">50K <small>images — 40K train / 10K test</small></div></div>
+              </div>
+              <div class="cls-wrap">
+                <div class="cls-h" data-i18n="pt.cls">18 component classes</div>
+                <span class="cc">Esfera</span><span class="cc">Amortecedor</span><span class="cc">Espaçador</span><span class="cc">Cadeia</span><span class="cc">Grampo</span><span class="cc">Grampo2</span><span class="cc">Conector</span><span class="cc">Conector1</span><span class="cc">Conector2</span><span class="cc">Conector3</span><span class="cc">Espiral</span><span class="cc">Manilha</span><span class="cc">Anel</span><span class="cc">Jumper</span><span class="cc">TerminalJumper</span><span class="cc">Emenda</span><span class="cc">Amortecedor2</span><span class="cc">Amortecedor3</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="foot">
+            <div class="stack">
+              <span class="chip">SAM2</span><span class="chip">Detectron2</span><span class="chip">PyTorch</span>
+              <span class="chip" data-i18n="tag.synth">Synthetic data</span><span class="chip" data-i18n="pt.chip.dji">DJI geospatial metadata</span>
+            </div>
+            <div class="note" data-i18n="pt.footnote">eval on <b>10K synthetic held-out</b> images · field validation handled by the production engineering team</div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Back -->
+    <section class="section--tight">
+      <div class="container">
+        <a class="btn btn--ghost reveal" href="index.html#work" data-i18n="back.btn"><svg class="ico" aria-hidden="true"><use href="#ui-arrow-left"/></svg> Back to all work</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer__note" data-i18n="foot.note">Designed &amp; coded by Mohamad — <span data-year>2026</span>.</p>
+      <p class="footer__built" data-i18n="pt.foot.built">Case study · Drone CV on transmission lines.</p>
+      <a class="footer__top" href="#case" data-i18n="foot.top">Back to top <svg class="ico" aria-hidden="true"><use href="#ui-arrow-up"/></svg></a>
+    </div>
+  </footer>
+
+  <script src="assets/js/i18n.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+</body>
+</html>

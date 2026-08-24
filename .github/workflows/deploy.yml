@@ -1,0 +1,82 @@
+# Builds both CVs from LaTeX and publishes the site to GitHub Pages.
+#
+#   main.tex   -> assets/cv/Mohamad-Kassem-Moussa-CV-ES.pdf   (español)
+#   cv-en.tex  -> assets/cv/Mohamad-Kassem-Moussa-CV-EN.pdf   (english)
+#
+# The site is staged with an allow-list, so private folders (metrics/, .claude/,
+# _backup_original/) can never end up on the public page by accident.
+
+name: Build CV and deploy site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile the CVs (LaTeX -> PDF)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: |
+            main.tex
+            cv-en.tex
+          # latexmk runs pdflatex as many times as \pageref{LastPage} needs.
+          latexmk_shell_escape: false
+
+      - name: Name the PDFs the way the site links to them
+        run: |
+          mkdir -p assets/cv
+          cp main.pdf  "assets/cv/Mohamad-Kassem-Moussa-CV-ES.pdf"
+          cp cv-en.pdf "assets/cv/Mohamad-Kassem-Moussa-CV-EN.pdf"
+          ls -lh assets/cv
+
+      - name: Stage the public site
+        run: |
+          mkdir -p _site
+          cp -a assets            _site/
+          cp    *.html            _site/
+          cp    favicon.svg       _site/
+          cp    site.webmanifest  _site/
+          # Serve folders/files starting with "_" verbatim (no Jekyll pass).
+          touch _site/.nojekyll
+          find _site -name '.DS_Store' -delete
+          find _site -name '.gitkeep'  -delete
+          du -sh _site
+
+      - name: Upload the site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Also expose the two PDFs as a downloadable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-pdfs
+          path: assets/cv/*.pdf
+          if-no-files-found: error
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

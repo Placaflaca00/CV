@@ -1,0 +1,75 @@
+/* =============================================================================
+   Case study: Drone CV on transmission lines (Itaipu Parquetec) — dashboard only.
+   (Shared case-study chrome lives in styles.css.)
+   The user's results dashboard, recoloured to the site's SINGLE violet system,
+   de-carded (flows as page content), with its duplicate title hidden.
+   Scoped under `.pti`; vars defined ON `.pti` so nothing leaks. The two metric
+   series read as box = violet, mask = blue (both in the violet→blue family).
+   ========================================================================== */
+
+.pti {
+  --panel:#141417; --panel2:#1c1c21; --muted:#76767f;
+  --copper:#b6a4fb;   /* "box" series / accents -> light violet */
+  --copper2:#c9bafd;  /* emphasis               -> lighter violet */
+  --teal:#5b9bf6;     /* "mask" series / edge   -> blue */
+  --grey:#52525b;
+  font-family: var(--f-body);
+  color: var(--text);
+  position: relative;
+}
+/* the page hero owns the title — drop the dashboard's internal header */
+.pti .head { display: none; }
+
+.pti .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:38px;position:relative;z-index:1}
+.pti .card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:13px;padding:20px 18px;
+  opacity:0;transform:translateY(14px);animation:ptiRise .6s cubic-bezier(.2,.7,.2,1) forwards}
+.pti .card:nth-child(1){animation-delay:.1s}.pti .card:nth-child(2){animation-delay:.18s}.pti .card:nth-child(3){animation-delay:.26s}.pti .card:nth-child(4){animation-delay:.34s}
+@keyframes ptiRise{to{opacity:1;transform:none}}
+.pti .card .v{font-family:'Fraunces',Georgia,serif;font-size:clamp(28px,3.6vw,40px);font-weight:600;line-height:1;letter-spacing:-.02em}
+.pti .card .v span{font-size:.5em;color:var(--copper);margin-left:2px}
+.pti .card .l{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin-top:12px;line-height:1.6}
+.pti .card.acc .v{color:var(--copper2)}
+.pti .card.edge{border-color:rgba(139,92,246,.4);box-shadow:0 0 0 1px rgba(139,92,246,.14) inset}
+.pti .card.edge .v{color:var(--teal)}
+.pti .sect{display:grid;grid-template-columns:1fr;gap:34px;position:relative;z-index:1}
+@media(min-width:860px){.pti .sect{grid-template-columns:1fr 1fr}}
+.pti .block-h{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.pti .block-h:before{content:"";width:18px;height:1px;background:var(--copper)}
+.pti .block-note{font-size:12.5px;color:var(--muted);line-height:1.5;margin-bottom:16px}
+.pti .legend{display:flex;gap:16px;margin-bottom:18px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted)}
+.pti .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.pti .legend .box{background:linear-gradient(90deg,var(--copper),var(--copper2))}.pti .legend .msk{background:var(--teal)}
+.pti .mg{margin-bottom:18px}
+.pti .mg-head{display:flex;align-items:baseline;gap:8px;margin-bottom:7px}
+.pti .mg-l{font-family:'Fraunces',Georgia,serif;font-size:17px;font-weight:600;color:var(--text)}
+.pti .mg-s{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted)}
+.pti .mg-bar{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;margin-bottom:4px}
+.pti .mg-track{height:9px;background:#0c0c0e;border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.pti .mg-fill{height:100%;width:0;border-radius:6px;animation:ptiGrow 1s cubic-bezier(.2,.7,.2,1) forwards .4s}
+.pti .mg-fill.box{background:linear-gradient(90deg,var(--copper),var(--copper2))}
+.pti .mg-fill.msk{background:var(--teal)}
+@keyframes ptiGrow{to{width:var(--w)}}
+.pti .mg-v{font-family:'JetBrains Mono',monospace;font-size:12px;min-width:48px;text-align:right}
+.pti .mg-v.box{color:var(--copper2);font-weight:700}.pti .mg-v.msk{color:var(--teal)}
+.pti .flow{display:flex;flex-direction:column;gap:10px}
+.pti .node{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:14px 16px;position:relative}
+.pti .node.mid{border-color:rgba(139,92,246,.45);background:linear-gradient(180deg,rgba(139,92,246,.06),var(--panel))}
+.pti .node .nt{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.pti .node .nv{font-family:'Fraunces',Georgia,serif;font-size:21px;font-weight:600;line-height:1.1;color:var(--text)}
+.pti .node .nv small{font-family:var(--f-body);font-size:12px;color:var(--muted);font-weight:400}
+.pti .node.mid .nv{color:var(--copper2)}
+.pti .arrow{text-align:center;color:var(--copper);font-size:15px;line-height:.6;opacity:.7}
+.pti .cls-wrap{margin-top:20px}
+.pti .cls-h{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.pti .cc{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);
+  border:1px solid var(--line);border-radius:6px;padding:3px 8px;margin:0 4px 5px 0;background:#141417}
+.pti .foot{margin-top:36px;padding-top:22px;border-top:1px solid var(--line);position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;justify-content:space-between}
+.pti .stack{display:flex;flex-wrap:wrap;gap:8px}
+.pti .chip{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.06em;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:5px 12px;background:var(--panel)}
+.pti .note{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);max-width:46ch;line-height:1.5}
+.pti .note b{color:var(--teal)}
+
+@media (prefers-reduced-motion: reduce){
+  .pti .card{animation:none;opacity:1;transform:none}
+  .pti .mg-fill{animation:none;width:var(--w)}
+}
