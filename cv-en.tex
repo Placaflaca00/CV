@@ -168,7 +168,7 @@
 % Mohamad Kassem Moussa — CV (EN)  %
 %==================================%
 
-\numberedPages % NOTE: lastpage requires a second build
+%\numberedPages % single page: no footer numbering
 \begin{document}
 
   %---------%
@@ -192,7 +192,7 @@
   %---------%
 
   \tinysection{Profile}
-  Systems Engineer (FPUNA, GPA 4.0) working in \textbf{applied Artificial Intelligence}: I take models from raw data all the way to production. I shipped an \textbf{AI sales assistant} over a \textbf{22,400-product catalog} —fine-tuned by me, self-hosted, and gated by an automated evaluation that decided every release— and \textbf{computer-vision} models trained on synthetic data and deployed to AWS with CI/CD and monitoring. I want to apply AI and automation to real operations: sales, catalog, customer support and internal processes.
+  Systems Engineer (FPUNA, GPA 4.0) working in \textbf{applied Artificial Intelligence}: I take models from raw data all the way to production. I shipped an \textbf{AI sales assistant} over a \textbf{22,400-product catalog} —fine-tuned by me and gated by an automated evaluation that decided every release— and \textbf{computer-vision} models trained on synthetic data and deployed to AWS with CI/CD and monitoring.
 
   %--------%
   % Skills %
@@ -201,10 +201,9 @@
   \section{Skills}
 
   \begin{resume_list}
-    \item \textbf{AI and LLMs:} fine-tuning (QLoRA / LoRA), RAG and information retrieval (BM25 / FTS5, embeddings), prompt engineering, evaluation and benchmark design, anti-hallucination guardrails, vLLM, Hugging Face, open-source models and frontier-model APIs
+    \item \textbf{AI and LLMs:} fine-tuning (QLoRA / LoRA), RAG and information retrieval, prompt engineering, evaluation and benchmark design, anti-hallucination guardrails, vLLM, Hugging Face
     \item \textbf{Machine Learning and Vision:} PyTorch, TensorFlow, ONNX, Detectron2, SAM2, scikit-learn, OpenCV, Pandas, NumPy, synthetic data generation
-    \item \textbf{MLOps and automation:} AWS (Lambda, ECR, API Gateway, CloudWatch), Docker, GitHub Actions (CI/CD), REST APIs with FastAPI, n8n, Python, Bash, Linux, Git
-    \item \textbf{Data:} PostgreSQL, SQLite / FTS5, Streamlit, Microsoft Excel (MOS certified)
+    \item \textbf{MLOps, data and automation:} AWS (Lambda, ECR, API Gateway, CloudWatch), Docker, GitHub Actions (CI/CD), FastAPI, n8n, Python, Bash, Linux, Git, PostgreSQL, Excel (MOS certified)
     \item \textbf{Languages:} Arabic (native), Spanish (advanced), English (intermediate)
   \end{resume_list}
 
@@ -217,12 +216,10 @@
   \headingBf{AI Engineer — Atacado Connect (Atacado Games)}{June -- July 2026}
   \headingIt{LLM sales assistant for a wholesale sales team -- sole author}{}
   \begin{resume_list}
-    \item Shipped an \textbf{AI sales assistant to production} for a $\sim$70-person sales team: natural-language search over a \textbf{22,400-product catalog}, answering with real SKUs, prices and stock instead of generic text
-    \item \textbf{Fine-tuned an 8B-parameter model with QLoRA} on 2,172 curated multi-turn conversations: a 60-case held-out benchmark went from \textbf{88.3\% to 95.0\%} with zero critical failures, trained on a single GPU
-    \item Built the \textbf{release gate} (automated 60-case evaluation, automatic abort on train/test contamination) and ran it on 5 versions: \textbf{it blocked 2 from production}, each with a written causal analysis
-    \item Reached \textbf{96.0\% true recall over 25,787 queries} on a self-verifying benchmark I generated from the catalog itself, with zero manual annotation; killed a planned neural re-ranker after \textbf{measuring its ceiling at +0.3 points}
-    \item Self-hosted the model with \textbf{vLLM} (FP8, prefix caching) on a single GPU: \textbf{p50 of 2.2 s} across 309 real production turns and \textbf{80 concurrent requests with 0 errors} under load testing
-    \item Instrumented \textbf{17 production guardrails} and 85 pipeline tracepoints at zero runtime cost, and also built an \textbf{AI product finder} for the public storefront
+    \item Shipped an \textbf{AI sales assistant to production} for a $\sim$70-person sales team: natural-language search over \textbf{22,400 products}, answering with real SKUs, prices and stock
+    \item \textbf{Fine-tuned an 8B-parameter model with QLoRA} on 2,172 curated multi-turn conversations: a 60-case held-out benchmark went from \textbf{88.3\% to 95.0\%} with zero critical failures, on a single GPU
+    \item Reached \textbf{96.0\% true recall over 25,787 queries} with a self-verifying benchmark generated from the catalog itself; killed a planned neural re-ranker after \textbf{measuring its ceiling at +0.3 points}
+    \item Self-hosted the model with \textbf{vLLM} (FP8) on a single GPU —\textbf{p50 of 2.2 s} across 309 real turns— and built the release gate that \textbf{blocked 2 of 5 versions} from production
   \end{resume_list}
 
   \headingBf{AI / Computer Vision Research Intern — Itaipu Parquetec (PTI)}{2024 -- 2026}
@@ -230,8 +227,7 @@
   \begin{resume_list}
     \item Built a \textbf{50,000-image synthetic dataset} with auto-generated instance masks (Detectron2 + SAM2), removing per-pixel manual annotation at scale
     \item Trained an \textbf{18-class instance-segmentation model} to \textbf{70.1\% box mAP} / 64.5\% mask mAP on a 10,000-image held-out set
-    \item Designed and prototyped a \textbf{georeferencing engine} that locates each detection from the drone's GPS and orientation metadata
-    \item Developed an \textbf{AI-assisted annotation tool} (SAM2-based) for images and video, speeding up the team's labelling workflow
+    \item Prototyped a \textbf{georeferencing engine} (drone GPS and orientation) and an \textbf{AI-assisted annotation tool} built on SAM2
   \end{resume_list}
 
   %----------%
@@ -241,42 +237,27 @@
   \section{AI Projects}
 
   \headingBf{ConoceTuAve — Bird-call classifier in production}{2026}
-  \headingIt{PyTorch, ONNX, AWS Lambda, GitHub Actions -- \href{https://huggingface.co/spaces/placaflaca/bird-classifier-py}{live demo}}{}
   \begin{resume_list}
-    \item Deployed the model end-to-end on \textbf{AWS Lambda} (ONNX, ECR + API Gateway) with \textbf{OIDC CI/CD}, CloudWatch monitoring and a consent-gated, human-reviewed retraining loop
-    \item \textbf{94.6\% top-1 accuracy} across 20 species, \textbf{+9.8 points} over a fair BirdNET baseline
+    \item \textbf{94.6\% top-1 accuracy} across 20 species (\textbf{+9.8 points} over BirdNET), deployed end-to-end on \textbf{AWS Lambda} (PyTorch, ONNX, ECR + API Gateway) with OIDC CI/CD, monitoring and a retraining loop — \href{https://huggingface.co/spaces/placaflaca/bird-classifier-py}{live demo}
   \end{resume_list}
 
-  \headingBf{Crystalline phase identification from X-ray diffraction (XRD)}{2025}
-  \headingIt{Undergraduate thesis -- TensorFlow, PyMatGen, Streamlit}{}
+  \headingBf{Crystalline phase identification from X-ray diffraction — Undergraduate thesis}{2025}
   \begin{resume_list}
-    \item Multi-task 1D CNN predicting compound, crystal system and unit-cell parameters from a single XRD pattern: \textbf{89.4\% compound accuracy} (18 classes) and \textbf{97.9\% crystal-system accuracy} (6 classes)
-    \item Trained \textbf{entirely on synthetic spectra} simulated from CIF files, with no real-data dependency; released as a Streamlit web app
+    \item Multi-task 1D CNN (TensorFlow) predicting compound, crystal system and unit cell from a single XRD pattern: \textbf{89.4\%} and \textbf{97.9\%} accuracy, trained \textbf{entirely on synthetic spectra}; released as a Streamlit app
   \end{resume_list}
 
-  %-----------%
-  % Education %
-  %-----------%
+  %------------------------------%
+  % Education and Certifications %
+  %------------------------------%
 
-  \section{Education}
+  \section{Education and Certifications}
 
-  \headingBf{Facultad Politécnica — Universidad Nacional de Asunción (FPUNA)}{2021 -- 2026}
-  \headingIt{B.Sc. in Systems Engineering -- GPA: 4.0}{}
-  \headingIt{Coursework completed -- thesis pending defence}{}
-  \headingIt{Thesis: ``Using artificial intelligence to identify materials by X-ray diffraction''}{}
-
-  %----------------%
-  % Certifications %
-  %----------------%
-
-  \section{Certifications and Conferences}
-
+  \headingBf{B.Sc. Systems Engineering — Facultad Politécnica, UNA (FPUNA)}{2021 -- 2026}
+  \headingIt{GPA: 4.0 -- coursework completed, thesis pending defence on AI applied to X-ray diffraction}{}
   \begin{resume_list}
-    \item \textbf{Machine Learning with Python} and \textbf{Python for Everybody} -- freeCodeCamp
-    \item \textbf{Google Summit: AI for Education} -- Google (2024)
-    \item \textbf{III Paraguayan Informatics Congress: towards ethical and explainable AI} -- XXI Scientific and Technological Meeting (October 2025)
-    \item \textbf{Thesis presentation} -- II Encontro de Física Aplicada na Tríplice Fronteira, UNILA, Foz do Iguaçu, Brazil (2025)
-    \item \textbf{Microsoft Office Specialist — Excel 2016} -- Microsoft / Certiport (credential UGxL-sFMp, verifiable online)
+    \item \textbf{Machine Learning with Python} and \textbf{Python for Everybody} -- freeCodeCamp ~$\cdot$~ \textbf{Google Summit: AI for Education} (2024)
+    \item \textbf{III Paraguayan Informatics Congress}, towards ethical and explainable AI (2025) ~$\cdot$~ \textbf{thesis presentation} at UNILA, Foz do Iguaçu, Brazil (2025)
+    \item \textbf{Microsoft Office Specialist — Excel 2016}, Microsoft / Certiport (credential UGxL-sFMp, verifiable online)
   \end{resume_list}
 
 \end{document}
