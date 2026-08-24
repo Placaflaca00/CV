@@ -73,7 +73,7 @@
     "ix.e0.cta": "Leer el caso de estudio &rarr;",
     "ix.e1.role": 'Pasante de investigación ML / Visión por Computadora <span class="at">@ Itaipu Parquetec</span>',
     "ix.e1.list": '<li>Construí un dataset sintético de <b>50 mil imágenes</b> con máscaras de instancia autogeneradas con Detectron2 + SAM2 — sin anotación manual píxel a píxel a escala.</li><li>Hice fine-tuning de un modelo de segmentación de instancias de 18 clases hasta <b>70.1% de box mAP</b> / 64.5% de mask mAP en un set reservado de 10 mil imágenes.</li><li>Diseñé y prototipé un motor de georreferenciación que localiza detecciones a partir del GPS y los metadatos de orientación del dron.</li><li>Construí una herramienta de anotación basada en SAM2 para imágenes y video, para arrancar el flujo de etiquetado.</li>',
-    "ix.e2.role": 'Ingeniería de Sistemas <span class="at">@ Facultad Politécnica, UNA</span>',
+    "ix.e2.role": 'Ingeniería de Sistemas <span class="at">@ Facultad Politécnica, UNE</span>',
     "ix.e2.list": '<li>Tesis de grado: <b>identificación automática de fases cristalinas por XRD</b> con deep learning — <a class="ulink" href="xrd-thesis.html">ver caso de estudio</a>.</li><li>Enfoque en machine learning, visión por computadora e ingeniería de datos aplicada.</li>',
     "ix.cert.h2": "Certificaciones",
     "ix.cert.verify": "Verificar en Certiport",
