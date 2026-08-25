@@ -125,9 +125,9 @@
 
         <ul class="nav__links" id="nav-links">
           <li><a class="nav__link" href="#about" data-i18n="nav.about"><i>01</i> About</a></li>
-          <li><a class="nav__link" href="#skills" data-i18n="nav.stack"><i>02</i> Stack</a></li>
+          <li><a class="nav__link" href="#experience" data-i18n="nav.exp"><i>02</i> Experience</a></li>
           <li><a class="nav__link" href="#work" data-i18n="nav.work"><i>03</i> Work</a></li>
-          <li><a class="nav__link" href="#experience" data-i18n="nav.exp"><i>04</i> Experience</a></li>
+          <li><a class="nav__link" href="#skills" data-i18n="nav.stack"><i>04</i> Stack</a></li>
           <li><a class="nav__link" href="#contact" data-i18n="nav.contact"><i>05</i> Contact</a></li>
         </ul>
 
@@ -179,7 +179,7 @@
             </div>
 
             <p class="hero__avail reveal" style="--i:4" data-i18n="ix.hero.avail">
-              <span class="status__dot" aria-hidden="true"></span> Open to ML / MLOps roles · 2026
+              <span class="status__dot" aria-hidden="true"></span> Currently looking for work — ML Engineer roles preferred
             </p>
           </div>
 
@@ -190,7 +190,8 @@
             </div>
             <pre class="term__body"><span class="c-com" data-i18n="ix.term.comment">// what I&rsquo;m shipping right now</span>
 <span class="c-key">const</span> eng = {
-  role: <span class="c-str">&quot;ML / MLOps Engineer&quot;</span>,
+  wants: <span class="c-str">&quot;ML Engineer&quot;</span>,
+  shipped: <span class="c-str">&quot;AI Engineer&quot;</span>,
   ships: [<span class="c-str">&quot;ONNX&quot;</span>, <span class="c-str">&quot;AWS Lambda&quot;</span>, <span class="c-str">&quot;CI/CD&quot;</span>],
   caresAbout: <span class="c-str">&quot;<span data-rotate='[&quot;latency&quot;,&quot;cost&quot;,&quot;drift&quot;,&quot;uptime&quot;,&quot;retraining&quot;]'>latency</span>&quot;</span>,
   openToWork: <span class="c-key">true</span>,
@@ -222,18 +223,17 @@
               what comes after it.
             </p>
             <p data-i18n="ix.about.p2">
-              Right now I&rsquo;m an ML / CV research intern at <strong>Itaipu Parquetec</strong>, building
-              50K-image synthetic datasets and Detectron2 + SAM2 segmentation pipelines for drone-based
-              transmission-line inspection. My side projects run in production too: a
-              <a class="ulink" href="conocetuave.html">bird-call classifier on AWS Lambda</a> with a
-              consent-gated, human-reviewed retraining loop, and a multi-task CNN for
-              <a class="ulink" href="xrd-thesis.html">XRD phase identification</a> trained entirely on
-              synthetic spectra.
+              On a research scholarship at <strong>Itaipu Parquetec</strong> I delivered a
+              <a class="ulink" href="transmission-cv.html">drone inspection project for Itaipu</a> —
+              a 50K-image synthetic dataset and Detectron2 + SAM2 segmentation pipelines. At
+              <a class="ulink" href="atacado-connect.html">Atacado Connect</a> I shipped an LLM sales
+              assistant to production as an AI engineer. My own projects run in production too: a
+              <a class="ulink" href="conocetuave.html">bird-call classifier on AWS Lambda</a> and a
+              multi-task CNN for <a class="ulink" href="xrd-thesis.html">XRD phase identification</a>.
             </p>
             <p data-i18n="ix.about.p3">
-              I&rsquo;m comfortable across the whole data stack, too — from Excel (MOS-certified) to
-              PyTorch training pipelines to Lambda inference. When I&rsquo;m not shipping, I&rsquo;m usually
-              reading post-mortems and tightening someone&rsquo;s CI pipeline.
+              I&rsquo;m <strong>currently looking for work</strong>. ML engineering is what I want to do
+              most; AI engineering is where I have already shipped.
             </p>
           </div>
 
@@ -241,7 +241,7 @@
             <dl data-i18n="ix.facts">
               <div>
                 <dt>Based in</dt>
-                <dd>Paraguay (GMT&minus;3) · Remote-friendly</dd>
+                <dd>Ciudad del Este, Paraguay (GMT&minus;3) · Remote-friendly</dd>
               </div>
               <div>
                 <dt>Focus</dt>
@@ -249,7 +249,7 @@
               </div>
               <div>
                 <dt>Currently</dt>
-                <dd>ML / CV Research Intern @ <span class="grad-text">Itaipu Parquetec</span></dd>
+                <dd><span class="grad-text">Looking for my next role</span></dd>
               </div>
               <div>
                 <dt>Ships with</dt>
@@ -257,7 +257,7 @@
               </div>
               <div>
                 <dt>Status</dt>
-                <dd><span class="ok">●</span> Open to ML / MLOps roles</dd>
+                <dd><span class="ok">●</span> Open to ML / AI Engineer roles</dd>
               </div>
             </dl>
           </aside>
@@ -265,70 +265,56 @@
       </div>
     </section>
 
-    <!-- ===================== Stack / Skills ===================== -->
-    <section id="skills" class="section">
+    <!-- ===================== Experience ===================== -->
+    <section id="experience" class="section">
       <div class="container">
         <div class="section__head reveal">
           <span class="section__num">02</span>
-          <h2>Stack</h2>
+          <h2 data-i18n="ix.exp.h2">Experience</h2>
           <span class="section__rule"></span>
         </div>
 
-        <p class="skills__intro reveal" data-i18n="ix.skills.intro">
-          I lead with the parts most ML portfolios skip — getting models to production and keeping
-          them there. This is the stack I actually ship with.
-        </p>
+        <ol class="timeline">
+          <li class="timeline__item timeline__item--accent reveal">
+            <span class="timeline__date tnum">Jun — Jul 2026</span>
+            <div>
+              <h3 class="timeline__role" data-i18n="ix.e0.role">AI Engineer <span class="at">@ <a class="ulink" href="atacado-connect.html">Atacado Connect</a></span></h3>
+              <ul class="timeline__list" data-i18n="ix.e0.list">
+                <li>Shipped an <b>internal LLM sales assistant to production</b> for a wholesale sales team — natural-language search over a <b>22.4K-product catalog</b>, answering with real SKUs, prices and stock.</li>
+                <li>Fine-tuned <b>Qwen3-8B with QLoRA</b> on 2,172 curated tool-calling trajectories: a 60-case held-out benchmark went <b>88.3% → 95.0%</b> with zero critical failures.</li>
+                <li>Self-hosted on <b>vLLM</b> (FP8, prefix caching) on one RTX 5090 — <b>p50 2.2s</b> across 309 production turns — and built the release gate that <b>blocked 2 of 5 versions</b> from production.</li>
+              </ul>
+              <ul class="tags"><li class="tag">Qwen3-8B</li><li class="tag">QLoRA</li><li class="tag">vLLM</li><li class="tag">FastAPI</li><li class="tag">RAG</li></ul>
+              <p class="timeline__cta"><a class="ulink" href="atacado-connect.html" data-i18n="ix.e0.cta">Read the case study &rarr;</a></p>
+            </div>
+          </li>
 
-        <div class="skills__grid">
-          <div class="reveal">
-            <div class="skill-group">
-              <h3 data-i18n="ix.sk1">Serving &amp; deployment</h3>
-              <ul class="tags">
-                <li class="tag">ONNX / Runtime</li><li class="tag">AWS Lambda</li><li class="tag">ECR</li>
-                <li class="tag">API Gateway</li><li class="tag">Docker</li>
+          <li class="timeline__item reveal">
+            <span class="timeline__date tnum">2024 — 2026</span>
+            <div>
+              <h3 class="timeline__role" data-i18n="ix.e1.role">AI / Computer Vision Scholarship Holder <span class="at">@ Itaipu Parquetec</span></h3>
+              <ul class="timeline__list" data-i18n="ix.e1.list">
+                <li>Delivered a <b>drone-based transmission-line inspection project for Itaipu</b>, built on a <b>50K-image</b> synthetic dataset with auto-generated Detectron2 + SAM2 instance masks — no manual per-pixel annotation at scale.</li>
+                <li>Fine-tuned an 18-class instance-segmentation model to <b>70.1% box mAP</b> / 64.5% mask mAP on a 10K held-out set.</li>
+                <li>Prototyped a georeferencing engine (drone GPS + orientation) and a SAM2-based annotation tool for images and video.</li>
               </ul>
+              <ul class="tags"><li class="tag">Detectron2</li><li class="tag">SAM2</li><li class="tag">PyTorch</li><li class="tag" data-i18n="tag.synth">Synthetic data</li></ul>
+              <p class="timeline__cta"><a class="ulink" href="transmission-cv.html" data-i18n="ix.e1.cta">Read the case study &rarr;</a></p>
             </div>
-            <div class="skill-group">
-              <h3 data-i18n="ix.sk2">Cloud &amp; MLOps</h3>
-              <ul class="tags">
-                <li class="tag">GitHub Actions (OIDC)</li><li class="tag">CI/CD</li><li class="tag">CloudWatch</li>
-                <li class="tag">DynamoDB</li><li class="tag">S3</li><li class="tag">EventBridge</li>
-              </ul>
-            </div>
-            <div class="skill-group">
-              <h3 data-i18n="ix.sk3">ML &amp; deep learning</h3>
-              <ul class="tags">
-                <li class="tag">Python</li><li class="tag">PyTorch</li><li class="tag">PyTorch Lightning</li>
-                <li class="tag">Detectron2</li><li class="tag">SAM2</li>
-              </ul>
-            </div>
-            <div class="skill-group">
-              <h3 data-i18n="ix.sk4">Data &amp; demos</h3>
-              <ul class="tags">
-                <li class="tag" data-i18n="tag.synth">Synthetic data</li><li class="tag">NumPy</li><li class="tag">scikit-learn</li>
-                <li class="tag">OpenCV</li><li class="tag">Gradio</li><li class="tag">HF Spaces</li>
-              </ul>
-            </div>
-          </div>
+          </li>
 
-          <div class="stack glass reveal" style="--i:1">
-            <p class="stack__title" data-i18n="ix.stack.title">Everyday stack</p>
-            <div class="stack__grid">
-              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-python"/></svg><span>Python</span></span>
-              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-pytorch"/></svg><span>PyTorch</span></span>
-              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-onnx"/></svg><span>ONNX</span></span>
-              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-docker"/></svg><span>Docker</span></span>
-              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-githubactions"/></svg><span>GH Actions</span></span>
-              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-amazonwebservices"/></svg><span>AWS</span></span>
-              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-awslambda"/></svg><span>Lambda</span></span>
-              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-huggingface"/></svg><span>HuggingFace</span></span>
-              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-numpy"/></svg><span>NumPy</span></span>
-              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-scikitlearn"/></svg><span>scikit-learn</span></span>
-              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-opencv"/></svg><span>OpenCV</span></span>
-              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-streamlit"/></svg><span>Streamlit</span></span>
+          <li class="timeline__item reveal">
+            <span class="timeline__date tnum">2021 — 2026</span>
+            <div>
+              <h3 class="timeline__role" data-i18n="ix.e2.role">B.Sc. Systems Engineering <span class="at">@ Facultad Politécnica, UNE</span></h3>
+              <ul class="timeline__list" data-i18n="ix.e2.list">
+                <li>Undergraduate thesis: <b>automated XRD crystalline-phase identification</b> with deep learning — <a class="ulink" href="xrd-thesis.html">see case study</a>.</li>
+                <li>Focus on machine learning, computer vision and applied data engineering.</li>
+              </ul>
+              <ul class="tags"><li class="tag">Deep learning</li><li class="tag" data-i18n="tag.research">Research</li></ul>
             </div>
-          </div>
-        </div>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -436,58 +422,70 @@
       </div>
     </section>
 
-    <!-- ===================== Experience ===================== -->
-    <section id="experience" class="section">
+    <!-- ===================== Stack / Skills ===================== -->
+    <section id="skills" class="section">
       <div class="container">
         <div class="section__head reveal">
           <span class="section__num">04</span>
-          <h2 data-i18n="ix.exp.h2">Experience</h2>
+          <h2>Stack</h2>
           <span class="section__rule"></span>
         </div>
 
-        <ol class="timeline">
-          <li class="timeline__item timeline__item--accent reveal">
-            <span class="timeline__date tnum">Jun — Jul 2026</span>
-            <div>
-              <h3 class="timeline__role" data-i18n="ix.e0.role">AI Engineer <span class="at">@ <a class="ulink" href="atacado-connect.html">Atacado Connect</a></span></h3>
-              <ul class="timeline__list" data-i18n="ix.e0.list">
-                <li>Shipped an <b>internal LLM sales assistant to production</b> for a wholesale sales team — natural-language search over a <b>22.4K-product catalog</b>, answering with real SKUs, prices and stock.</li>
-                <li>Fine-tuned <b>Qwen3-8B with QLoRA</b> on 2,172 curated tool-calling trajectories: a 60-case held-out benchmark went <b>88.3% → 95.0%</b> with zero critical failures.</li>
-                <li>Built the release gate (mechanical graders, contamination abort) and ran it on 5 versions — <b>it blocked 2 of my own models</b>, each with a written causal analysis.</li>
-                <li>Self-hosted on <b>vLLM</b> (FP8, prefix caching) on one RTX 5090: <b>p50 2.2s</b> across 309 production turns; <b>80 concurrent loops, 0 errors</b> under load.</li>
-                <li>Also built an <b>AI product finder for the public storefront</b> — compare, cart, favourites, shareable links and voice input — completed but not released during the engagement.</li>
-              </ul>
-              <ul class="tags"><li class="tag">Qwen3-8B</li><li class="tag">QLoRA</li><li class="tag">vLLM</li><li class="tag">FastAPI</li><li class="tag">RAG</li></ul>
-              <p class="timeline__cta"><a class="ulink" href="atacado-connect.html" data-i18n="ix.e0.cta">Read the case study &rarr;</a></p>
-            </div>
-          </li>
+        <p class="skills__intro reveal" data-i18n="ix.skills.intro">
+          I lead with the parts most ML portfolios skip — getting models to production and keeping
+          them there. This is the stack I actually ship with.
+        </p>
 
-          <li class="timeline__item reveal">
-            <span class="timeline__date tnum">2024 — 2026</span>
-            <div>
-              <h3 class="timeline__role" data-i18n="ix.e1.role">ML / Computer Vision Research Intern <span class="at">@ Itaipu Parquetec</span></h3>
-              <ul class="timeline__list" data-i18n="ix.e1.list">
-                <li>Built a <b>50K-image</b> synthetic dataset with auto-generated Detectron2 + SAM2 instance masks — no manual per-pixel annotation at scale.</li>
-                <li>Fine-tuned an 18-class instance-segmentation model to <b>70.1% box mAP</b> / 64.5% mask mAP on a 10K held-out set.</li>
-                <li>Designed and prototyped a georeferencing engine that localizes detections from drone GPS + orientation metadata.</li>
-                <li>Built a SAM2-based annotation tool for images and video to bootstrap the labelling workflow.</li>
+        <div class="skills__grid">
+          <div class="reveal">
+            <div class="skill-group">
+              <h3 data-i18n="ix.sk1">Serving &amp; deployment</h3>
+              <ul class="tags">
+                <li class="tag">ONNX / Runtime</li><li class="tag">AWS Lambda</li><li class="tag">ECR</li>
+                <li class="tag">API Gateway</li><li class="tag">Docker</li>
               </ul>
-              <ul class="tags"><li class="tag">Detectron2</li><li class="tag">SAM2</li><li class="tag">PyTorch</li><li class="tag" data-i18n="tag.synth">Synthetic data</li></ul>
             </div>
-          </li>
+            <div class="skill-group">
+              <h3 data-i18n="ix.sk2">Cloud &amp; MLOps</h3>
+              <ul class="tags">
+                <li class="tag">GitHub Actions (OIDC)</li><li class="tag">CI/CD</li><li class="tag">CloudWatch</li>
+                <li class="tag">DynamoDB</li><li class="tag">S3</li><li class="tag">EventBridge</li>
+              </ul>
+            </div>
+            <div class="skill-group">
+              <h3 data-i18n="ix.sk3">ML &amp; deep learning</h3>
+              <ul class="tags">
+                <li class="tag">Python</li><li class="tag">PyTorch</li><li class="tag">PyTorch Lightning</li>
+                <li class="tag">Detectron2</li><li class="tag">SAM2</li>
+              </ul>
+            </div>
+            <div class="skill-group">
+              <h3 data-i18n="ix.sk4">Data &amp; demos</h3>
+              <ul class="tags">
+                <li class="tag" data-i18n="tag.synth">Synthetic data</li><li class="tag">NumPy</li><li class="tag">scikit-learn</li>
+                <li class="tag">OpenCV</li><li class="tag">Gradio</li><li class="tag">HF Spaces</li>
+              </ul>
+            </div>
+          </div>
 
-          <li class="timeline__item reveal">
-            <span class="timeline__date tnum">2021 — 2026</span>
-            <div>
-              <h3 class="timeline__role" data-i18n="ix.e2.role">B.Sc. Systems Engineering <span class="at">@ Facultad Politécnica, UNE</span></h3>
-              <ul class="timeline__list" data-i18n="ix.e2.list">
-                <li>Undergraduate thesis: <b>automated XRD crystalline-phase identification</b> with deep learning — <a class="ulink" href="xrd-thesis.html">see case study</a>.</li>
-                <li>Focus on machine learning, computer vision and applied data engineering.</li>
-              </ul>
-              <ul class="tags"><li class="tag">Deep learning</li><li class="tag" data-i18n="tag.research">Research</li></ul>
+          <div class="stack glass reveal" style="--i:1">
+            <p class="stack__title" data-i18n="ix.stack.title">Everyday stack</p>
+            <div class="stack__grid">
+              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-python"/></svg><span>Python</span></span>
+              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-pytorch"/></svg><span>PyTorch</span></span>
+              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-onnx"/></svg><span>ONNX</span></span>
+              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-docker"/></svg><span>Docker</span></span>
+              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-githubactions"/></svg><span>GH Actions</span></span>
+              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-amazonwebservices"/></svg><span>AWS</span></span>
+              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-awslambda"/></svg><span>Lambda</span></span>
+              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-huggingface"/></svg><span>HuggingFace</span></span>
+              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-numpy"/></svg><span>NumPy</span></span>
+              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-scikitlearn"/></svg><span>scikit-learn</span></span>
+              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-opencv"/></svg><span>OpenCV</span></span>
+              <span class="chip"><svg class="brand-ico" aria-hidden="true"><use href="#ti-streamlit"/></svg><span>Streamlit</span></span>
             </div>
-          </li>
-        </ol>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -539,8 +537,8 @@
           <p class="eyebrow" data-i18n="ix.c.eyebrow"><span class="tnum">05</span> &middot; What&rsquo;s next</p>
           <h2 class="contact__title" data-i18n="ix.c.title">Let&rsquo;s put a model in production.</h2>
           <p class="contact__lead" data-i18n="ix.c.lead">
-            I&rsquo;m open to ML / MLOps roles for 2026. The fastest way to reach me is email — I usually
-            reply within a day.
+            I&rsquo;m currently looking for work — ML Engineer roles above all. The fastest way to reach
+            me is email; I usually reply within a day.
           </p>
 
           <a class="btn btn--primary btn--lg" href="mailto:moha251mmed@gmail.com" data-i18n="ix.c.btn">
