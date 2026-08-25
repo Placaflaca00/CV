@@ -20,7 +20,8 @@
 /* the page hero owns the title — drop the dashboard's internal header */
 .pti .head { display: none; }
 
-.pti .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:38px;position:relative;z-index:1}
+.pti .grid4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:38px;position:relative;z-index:1}
+@media (min-width:760px){.pti .grid4{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .pti .card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:13px;padding:20px 18px;
   opacity:0;transform:translateY(14px);animation:ptiRise .6s cubic-bezier(.2,.7,.2,1) forwards}
 .pti .card:nth-child(1){animation-delay:.1s}.pti .card:nth-child(2){animation-delay:.18s}.pti .card:nth-child(3){animation-delay:.26s}.pti .card:nth-child(4){animation-delay:.34s}
