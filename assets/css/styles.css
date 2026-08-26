@@ -651,11 +651,12 @@ strong { color: var(--text); font-weight: 600; }
    sentence are deliberately left alone. */
 @media (max-width: 860px) {
   .lang-toggle, .nav__brand, .hero__scroll, .footer__top, .timeline__cta a, .copy-btn { position: relative; }
-  .lang-toggle::after, .nav__brand::after, .hero__scroll::after, .footer__top::after,
-  .timeline__cta a::after, .copy-btn::after {
+  .lang-toggle::before, .nav__brand::before, .hero__scroll::before, .footer__top::before,
+  .timeline__cta a::before, .copy-btn::before {
     content: "";
     position: absolute; left: 0; right: 0; top: 50%;
     height: 44px; transform: translateY(-50%);
+    background: none; border: 0; pointer-events: auto;
   }
 }
 
